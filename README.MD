@@ -1,0 +1,103 @@
+# Avalanche CSS grid system
+
+**Superclean, powerful, responsive, Sass grid system. That's it.**
+
+## Why use Avalanche?
+
+- No bloat. Only create the selectors you'll actually use
+- No duplication. 1/2 == 2/4 so why create two selectors?
+- No floats. No clears. No .last
+- Flexible, configurable naming conventions
+- Nesting to infinity and beyond
+- Real-world breakpoint naming. 'thumb', 'handheld' and 'desk'; not 'xs', 'md' and 'xl'
+- Integrated media query mixin. Connect your media queries to your grid widths
+
+## Installation
+
+1. Copy `avalanche.scss` into your project (I recommend a vendor folder `@include "vendor/avalanche";`)
+2. Change settings to fit your requirements or use the defaults
+3. Compile!
+
+## Settings
+
+**`$av-namespace`**  
+Global prefix for layout and cell class names. Default: `grid`.
+
+**`$av-gutter`**  
+Gutter width between cells. Default: `20px`.
+
+**`$av-width-class-namespace`**  
+Prefix for width class names. Default: `''`.
+
+**`$av-width-class-style`**  
+Naming style of width classes. Options: `fraction` (1/2, 3/4 etc), `percentage` (25, 50 etc), `fragment` (1-of-3, 4-of-5 etc).  
+*N.B. If using percentage then `$av-width-class-namespace` above cannot be null. Avalanche escapes leading integers for fraction and fragment naming styles but this isn't possible with percentage style as Sass attempts to escape the whole number (e.g. 50 instead of just 5 or 30 instead of just 3) so fails*.
+
+**`$av-widths`**  
+Sass list of width denominator values (when expressed as a fraction). For example, 2 produces 1/2 width class, 3 produces 1/3 and 2/3 width classes names etc. Default: `( 2, 3, 4 )`.  
+*N.B. This setting has a large impact on the size of your compiled CSS. Avoid bloat by inputting just the numbers you'll use.*.
+
+**`$av-enable-responsive`**  
+Enable/disable the inclusion of responsive width classes. With this enabled, class names (for each denominator set above) will be created for each of your breakpoint aliases (set below). Default: `true`.
+
+**`$av-breakpoints`**  
+Sass map of responsive breakpoint aliases and associated media queries (in key-value pairs).  
+*N.B. This setting has a large impact on the size of your compiled CSS. Avoid bloat by inputting just the breakpoints you'll use.*
+
+## Grid layouts
+
+Apply as modifier classes to your base `grid` element. For example; `<div class="grid grid--center">`.
+
+All optionable grid layout listed below are switched off by default. Set to `true` to enable.
+
+**`$av-enable-grid-center`**  
+All cells are horizontally centered within the container.
+
+**`$av-enable-grid-cell-center`**  
+Center an individual grid cell within the container. N.B. Class should be applied to an individual cell, not the grid container. For example; `<div class="grid__cell grid__cell--center">`.
+
+**`$av-enable-grid-right`**  
+All cells are horizontally aligned to the right within the container.
+
+**`$av-enable-grid-middle`**  
+All cells are vertically centered within in the container.
+
+**`$av-enable-grid-bottom`**  
+All cells are vertically aligned to the bottom of the container.
+
+**`$av-enable-grid-flush`**  
+Gutters removed between cells.
+
+**`$av-enable-grid-tiny`**  
+Gutters between cells set to a quarter of the global gutter value. Default: `5px`.
+
+**`$av-enable-grid-small`**  
+Gutters between cells set to half of the global gutter value. Default: `10px`.
+
+**`$av-enable-grid-large`**  
+Gutters between cells set to double the global gutter value. Default: `40px`.
+
+**`$av-enable-grid-huge`**  
+Gutters between cells set to quadruple the global gutter value. Default: `80px`.
+
+**`$av-enable-grid-auto`**  
+All cells take up an unspecified width set by their content.
+
+**`$av-enable-grid-rev`**  
+Grid cells are displayed in the opposite of their source order.
+
+## Media query
+
+Avalanche includes a media query mixin that makes use of the breakpoint aliases you set. This enables better coupling between your grid and other responsive content items. Usage as follows.
+
+```
+@include av-mq(pocket){
+  .content-item{
+    /* responsive CSS */
+  }
+}
+```
+
+## Questions
+
+If you have any questions or need some help then feel free to tweet me at [@colourgarden](http://twitter.com/colourgarden) or [open an issue]().
