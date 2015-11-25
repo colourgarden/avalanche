@@ -1,6 +1,6 @@
 # Avalanche CSS grid system
 
-**Superclean, powerful, responsive, Sass grid system. That's it.**
+**Superclean, powerful, responsive, Sass-based, BEM-syntax CSS grid system**
 
 ## Why use Avalanche?
 
@@ -10,13 +10,24 @@
 - Flexible, configurable naming conventions
 - Nesting to infinity and beyond
 - Real-world breakpoint naming. 'thumb', 'handheld' and 'desk'; not 'xs', 'md' and 'xl'
-- Integrated media query mixin. Connect your media queries to your grid widths
+- Integrated media query mixin. Connect your media queries to your grid breakpoints
 
 ## Installation
 
-1. Copy `avalanche.scss` into your project (I recommend a vendor folder `@include "vendor/avalanche";`)
-2. Change settings to fit your requirements or use the defaults
+1. Copy `_avalanche.scss` into your project (vendor folder recommended `@include "vendor/avalanche"`)
+2. Override settings to fit your requirements or use the defaults
 3. Compile!
+
+## Usage
+
+Example of a two column, responsive, centered grid. All grid layout classes and responsive width classes are modifiers.
+
+```
+<div class="grid grid--center">
+  <div class="3/4 1/2--thumb grid__cell"></div>
+  <div class="1/4 1/2--thumb grid__cell"></div>
+</div>
+```
 
 ## Settings
 
@@ -30,31 +41,47 @@ Gutter width between cells. Default: `20px`.
 Prefix for width class names. Default: `''`.
 
 **`$av-width-class-style`**  
-Naming style of width classes. Options: `fraction` (1/2, 3/4 etc), `percentage` (25, 50 etc), `fragment` (1-of-3, 4-of-5 etc).  
+Naming style of width classes. Default: `'fraction'`. Options: `fraction` (1/2, 3/4 etc), `percentage` (25, 50 etc), `fragment` (1-of-3, 4-of-5 etc).  
 *N.B. If using percentage then `$av-width-class-namespace` above cannot be null. Avalanche escapes leading integers for fraction and fragment naming styles but this isn't possible with percentage style as Sass attempts to escape the whole number (e.g. 50 instead of just 5 or 30 instead of just 3) so fails*.
 
 **`$av-widths`**  
-Sass list of width denominator values (when expressed as a fraction). For example, 2 produces 1/2 width class, 3 produces 1/3 and 2/3 width classes names etc. Default: `( 2, 3, 4 )`.  
-*N.B. This setting has a large impact on the size of your compiled CSS. Avoid bloat by inputting just the numbers you'll use.*.
+Sass list of width denominator values (when expressed as a fraction). For example, 2 produces 1/2 width class, 3 produces 1/3 and 2/3 width classes etc. Default: `( 2, 3, 4 )`.  
+*N.B. This setting has a large impact on the size of your compiled CSS. Avoid bloat by inputting just the numbers you'll use.*
 
 **`$av-enable-responsive`**  
-Enable/disable the inclusion of responsive width classes. With this enabled, class names (for each denominator set above) will be created for each of your breakpoint aliases (set below). Default: `true`.
+Enable/disable the inclusion of responsive width classes. With this enabled, class names (for denominators set above) will be created for each of your breakpoint aliases (set below). Default: `true`.
 
 **`$av-breakpoints`**  
 Sass map of responsive breakpoint aliases and associated media queries (in key-value pairs).  
-*N.B. This setting has a large impact on the size of your compiled CSS. Avoid bloat by inputting just the breakpoints you'll use.*
+*N.B. This setting has a large impact on the size of your compiled CSS. Avoid bloat by inputting just the breakpoints you'll use.*  
+Default:
+```
+(
+  "thumb":            "screen and (max-width: 499px)",
+  "handheld":         "screen and (min-width: 500px) and (max-width: 800px)",
+  "handheld-and-up":  "screen and (min-width: 500px)",
+  "pocket":           "screen and (max-width: 800px)",
+  "lap":              "screen and (min-width: 801px) and (max-width: 1024px)",
+  "lap-and-up":       "screen and (min-width: 801px)",
+  "portable":         "screen and (max-width: 1024px)",
+  "desk":             "screen and (min-width: 1025px)",
+  "widescreen":       "screen and (min-width: 1160px)",
+  "retina":           "screen and (-webkit-min-device-pixel-ratio: 2), screen and (min-resolution: 192dpi), screen and (min-resolution: 2dppx)"
+)
+```
 
 ## Grid layouts
 
 Apply as modifier classes to your base `grid` element. For example; `<div class="grid grid--center">`.
 
-All optionable grid layout listed below are switched off by default. Set to `true` to enable.
+All optionable grid layouts listed below are switched off by default. Set to `true` to enable.
 
 **`$av-enable-grid-center`**  
 All cells are horizontally centered within the container.
 
 **`$av-enable-grid-cell-center`**  
-Center an individual grid cell within the container. N.B. Class should be applied to an individual cell, not the grid container. For example; `<div class="grid__cell grid__cell--center">`.
+Center an individual grid cell within the container.  
+*N.B. Class should be applied to an individual cell, not the grid container. For example; `<div class="grid__cell grid__cell--center">`.*
 
 **`$av-enable-grid-right`**  
 All cells are horizontally aligned to the right within the container.
