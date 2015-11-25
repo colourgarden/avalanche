@@ -127,4 +127,4 @@ Avalanche includes a media query mixin that makes use of the breakpoint aliases 
 
 ## Questions
 
-If you have any questions or need some help then feel free to tweet me at [@colourgarden](http://twitter.com/colourgarden) or [open an issue]().
+If you have any questions or need some help then feel free to tweet me at [@colourgarden](http://twitter.com/colourgarden) or [open an issue](https://github.com/colourgarden/avalanche/issues/new).
