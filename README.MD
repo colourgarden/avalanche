@@ -12,6 +12,10 @@
 - Real-world breakpoint naming. 'thumb', 'handheld' and 'desk'; not 'xs', 'md' and 'xl'
 - Integrated media query mixin. Connect your media queries to your grid breakpoints
 
+## Demo
+
+View <a href="http://colourgarden.net/avalanche/">the demo</a> to see Avalanche in action!
+
 ## Installation
 
 1. Copy `_avalanche.scss` into your project (vendor folder recommended `@include "vendor/avalanche"`)
