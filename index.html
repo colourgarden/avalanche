@@ -1,0 +1,478 @@
+<!doctype html>
+<html class="no-js" lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <title>Avalanche - Responsive, Sass-based, BEM-syntax CSS grid system</title>
+  <meta name="description" content="Superclean, powerful, responsive, Sass-based CSS grid system. Based on the BEM syntax, Avalanche allows you to customize your grid to your own specifications.">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <script src="//use.typekit.net/pkm1ukl.js"></script>
+  <script>try{Typekit.load();}catch(e){}</script>
+
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <header>
+    <img class="logo" src="logo.png" alt="Avalanche">
+  </header>
+
+  <main>
+
+    <!--
+    // Ref: https://mathiasbynens.be/notes/css-escapes
+    // Ref: https://css-tricks.com/snippets/css/retina-display-media-query/
+
+    // Avalanches start with a small reaction which ends up creating a big result. Avalanche grid system is very small but has big results.
+    -->
+
+    <h1>Superclean, powerful, responsive, Sass-based, BEM-syntax CSS grid system</h1>
+
+    <div style="text-align: center;">
+      <a class="btn btn--primary" href="https://github.com/colourgarden/avalanche">View on Github</a>
+      <a class="btn" href="https://colourgarden.github.io/avalanche.css">Quickstart CSS (25kb)</a>
+    </div>
+
+    <br><br><br>
+
+    <section>
+
+      <h2>Why use Avalanche?</h2>
+
+      <div class="grid grid--huge">
+        <div class="1/2--handheld-and-up grid__cell">
+
+          <h3>Code quality</h3>
+
+          <h4>Easy, flexible naming convention</h4>
+          <p>Avalanche gives you a choice of three naming conventions for your width class names: fraction (<code>1/4</code>), percentage (<code>25</code>) or fragment (<code>1-of-4</code>). No need to spend time working out how many columns are in your nested layout - if a cell needs to take up half the width of it's container, tell it to!</p>
+
+          <h4>Only create the classes you'll actually use</h4>
+          <p>You tell Avalanche which widths you require and it'll create just those ones for you, keeping your compiled CSS lean and free from bloat classes you'll never use. If you need just halves, thirds and quarters then tell Avalanche to only use those. If you need all the way from one to 12 columns, Avalanche can handle that too.</p>
+
+          <h4>Efficient CSS selectors</h4>
+          <p>When compiling your width classes, Avalanche checks for duplicate widths and bundles together matching selectors meaning that your width classes are as efficient as possible. No bloat here.</p>
+
+          <h4>No floats</h4>
+          <p>Avalanche utilises <code>inline-block</code> to create flexible grid layouts that aren't hindered by always being anchored to the left- or right-hand edge. Align your grids left, right, top, middle, bottom and back-to-front (yep, really!) with just a single class on the grid container.</p>
+
+        </div>
+        <div class="1/2--handheld-and-up grid__cell">
+
+          <h3>Responsive</h3>
+
+          <h4>Real-world breakpoints</h4>
+          <p>Based on the <a href="http://www.mydevice.io/devices/" target="_blank">dimensions of popular mobile devices</a>, Avalanche's breakpoints target real-world values for shifting content. No snapping from desktop to hamburger menu at 1024px.</p>
+
+          <h4>Add or remove breakpoints with one line of code</h4>
+          <p>As with its width classes, Avalanche's breakpoints are pre-defined - by you - for greater control and efficiency. If you need a new breakpoint, simply add an alias and a value to the settings and Avalanche will do the rest.</p>
+
+          <h4>Simple, connected media query naming</h4>
+          <p>Avalanche includes a simple media query mixin for use within your stylesheets. Use the same breakpoint alias as your width classes to target specific device widths in an easy-to-understand way. No need to remember to add a pixel onto your <code>min-width</code> values.</p>
+
+          <h4>Infinitely nestable</h4>
+          <p>Nest as many grids within each other as you like without issue. No padding nightmares or calcuating how many columns equals a quarter of a '6-of-12' column here. Right-aligned grid inside a center-aligned grid? No problem!
+
+        </div>
+      </div>
+
+      <hr>
+
+      <h2>Demo</h2>
+
+      <h5>Regular grid layout <code>.grid</code></h5>
+      <article class="grid-sandbox">
+        <div class="grid">
+          <div class="1/2 grid__cell">
+            <div class="box">.1/2</div>
+          </div>
+          <div class="1/2 grid__cell">
+            <div class="box">.1/2</div>
+          </div>
+          <div class="1/3 grid__cell">
+            <div class="box">.1/3</div>
+          </div>
+          <div class="2/3 grid__cell">
+            <div class="box">.2/3</div>
+          </div>
+          <div class="1/4 grid__cell">
+            <div class="box">.1/4</div>
+          </div>
+          <div class="1/2 grid__cell">
+            <div class="box">.1/2</div>
+          </div>
+          <div class="1/4 grid__cell">
+            <div class="box">.1/4</div>
+          </div>
+        </div>
+      </article>
+
+      <br>
+
+      <h5>Horizontally centered grid <code>.grid--center</code></h5>
+      <article class="grid-sandbox">
+        <div class="grid grid--center">
+          <div class="1/3 grid__cell">
+            <div class="box">.1/3</div>
+          </div>
+          <div class="1/3 grid__cell">
+            <div class="box">.1/3</div>
+          </div>
+        </div>
+      </article>
+      
+      <br>
+
+      <h5>Centered grid cell <code>.grid__cell--center</code></h5>
+      <article class="grid-sandbox">
+        <div class="grid">
+          <div class="1/3 grid__cell">
+            <div class="box">.1/3</div>
+          </div>
+          <div class="1/3 grid__cell">
+            <div class="box">.1/3</div>
+          </div>
+          <div class="1/3 grid__cell">
+            <div class="box">.1/3</div>
+          </div>
+          <div class="1/2 grid__cell grid__cell--center">
+            <div class="box">.1/2<br><small>This cell is within the same container as the others but is centered by itself</small></div>
+          </div>
+        </div>
+      </article>
+      
+      <br>
+
+      <h5>Right-aligned grid <code>.grid--right</code></h5>
+      <article class="grid-sandbox">
+        <div class="grid grid--right">
+          <div class="1/3 grid__cell">
+            <div class="box">.1/3</div>
+          </div>
+          <div class="1/3 grid__cell">
+            <div class="box">.1/3</div>
+          </div>
+        </div>
+      </article>
+      
+      <br>
+
+      <h5>Gutterless grid <code>.grid--flush</code></h5>
+      <article class="grid-sandbox">
+        <div class="grid grid--flush">
+          <div class="1/4 grid__cell">
+            <div class="box">.1/4</div>
+          </div>
+          <div class="3/4 grid__cell">
+            <div class="box">.3/4</div>
+          </div>
+        </div>
+      </article>
+      
+      <br>
+
+      <h5>Vertically centered grid <code>.grid--middle</code></h5>
+      <article class="grid-sandbox">
+        <div class="grid grid--middle">
+          <div class="1/3 grid__cell">
+            <div class="box">.1/3</div>
+          </div>
+          <div class="1/3 grid__cell">
+            <div class="box box--tall">.1/3</div>
+          </div>
+          <div class="1/3 grid__cell">
+            <div class="box">.1/3</div>
+          </div>
+        </div>
+      </article>
+      
+      <br>
+
+      <h5>Vertically bottom-aligned grid <code>.grid--bottom</code></h4>
+      <article class="grid-sandbox">
+        <div class="grid grid--bottom">
+          <div class="1/4 grid__cell">
+            <div class="box">.1/4</div>
+          </div>
+          <div class="1/4 grid__cell">
+            <div class="box box--tall">.1/4</div>
+          </div>
+          <div class="1/4 grid__cell">
+            <div class="box">.1/4</div>
+          </div>
+          <div class="1/4 grid__cell">
+            <div class="box box--tall">.1/4</div>
+          </div>
+        </div>
+      </article>
+      
+      <br>
+
+      <h5>Grid with cells of undefined width <code>.grid--auto</code></h5>
+      <article class="grid-sandbox">
+        <div class="grid grid--auto">
+          <div class="grid__cell">
+            <div class="box">Cells in an auto grid</div>
+          </div>
+          <div class="grid__cell">
+            <div class="box">have a flexible width</div>
+          </div>
+          <div class="grid__cell">
+            <div class="box">meaning they have an unspecified width</div>
+          </div>
+          <div class="grid__cell">
+            <div class="box">dependant on their content</div>
+          </div>
+        </div>
+      </article>
+      
+      <br>
+
+      <h5>Grid with cells displayed in opposite of source order <code>.grid--rev</code></h5>
+      <article class="grid-sandbox">
+        <div class="grid grid--rev">
+          <div class="1/2 grid__cell">
+            <div class="box">First in source order</div>
+          </div>
+          <div class="1/2 grid__cell">
+            <div class="box">Second in source order</div>
+          </div>
+        </div>
+      </article>
+
+      <hr>
+
+      <h2>Installation</h2>
+      <ol>
+        <li>Copy <code>_avalanche.scss</code> into your project (vendor folder recommended - <code>@include "vendor/avalanche"</code>)</li>
+        <li>Override settings to fit your requirements or use the defaults</li>
+        <li>Compile!</li>
+      </ol>
+
+      <hr>
+
+      <h2>Settings</h2>
+
+      <table>
+        <tr>
+          <th width="50%">
+            <strong>Grid namespace</strong>
+            <br>Global prefix for layout and cell class names.
+          </th>
+          <td width="50%">
+            <code>$av-namespace: 'grid';</code>
+          </td>
+        </tr>
+        <tr>
+          <th>
+            <strong>Grid gutter</strong>
+            <br>Gutter width between cells.
+          </th>
+          <td>
+            <code>$av-gutter: 20px;</code>
+          </td>
+        </tr>
+        <tr>
+          <th>
+            <strong>Width class namespace</strong>
+            <br>Prefix for width class names.
+          </th>
+          <td>
+            <code>$av-width-class-namespace: '';</code>
+          </td>
+        </tr>
+        <tr>
+          <th>
+            <strong>Width class naming style</strong>
+            <br>Naming style of width classes. Options: <code>fraction</code> (1/2, 3/4 etc), <code>percentage</code> (25, 50 etc), <code>fragment</code> (1-of-3, 4-of-5 etc).
+          </th>
+          <td>
+            <code>$av-width-class-style: 'fraction';</code>
+            <br><small><em>N.B. If using percentage then <code>$av-width-class-namespace</code> above cannot be null. Avalanche escapes leading integers for fraction and fragment naming styles but this isn't possible with percentage style as Sass attempts to escape the whole number (e.g. 50 instead of just 5 or 30 instead of just 3) so fails.</em></small>
+          </td>
+        </tr>
+        <tr>
+          <th>
+            <strong>Widths required</strong>
+            <br>Sass list of width denominator values (when expressed as a fraction). For example, 2 produces 1/2 width class, 3 produces 1/3 and 2/3 width classes etc.
+          </th>
+          <td>
+            <pre>$av-widths: (
+  2,
+  3,
+  4
+);</pre>
+            <small><em>N.B. This setting has a large impact on the size of your compiled CSS. Avoid bloat by inputting just the numbers you'll use.</em></small>
+          </td>
+        </tr>
+        <tr>
+          <th>
+            <strong>Responsive?</strong>
+            <br>Enable/disable the inclusion of responsive width classes. With this enabled, class names (for denominators set above) will be created for each of your breakpoint aliases (set below).
+          </th>
+          <td>
+            <code>$av-enable-responsive: true;</code>
+          </td>
+        </tr>
+        <tr>
+          <th>
+            <strong>Breakpoints</strong>
+            <br>Sass map of responsive breakpoint aliases and associated media queries (in key-value pairs).
+          </th>
+          <td>
+            <pre>$av-breakpoints:  (
+  "thumb":        "screen and (max-width: 499px)",
+  "palm":         "screen and (min-width: 500px) and (max-width: 800px)",
+  "palm-and-up":  "screen and (min-width: 500px)",
+  "pocket":       "screen and (max-width: 800px)",
+  "lap":          "screen and (min-width: 801px) and (max-width: 1024px)",
+  "lap-and-up":   "screen and (min-width: 801px)",
+  "portable":     "screen and (max-width: 1024px)",
+  "desk":         "screen and (min-width: 1025px)",
+  "wide":         "screen and (min-width: 1160px)",
+  "retina":       "(-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi)"
+);</pre>
+            <small><em>N.B. This setting has a large impact on the size of your compiled CSS. Avoid bloat by inputting just the breakpoints you'll use.</em></small>
+          </td>
+        </tr>
+
+      </table>
+
+      <hr>
+
+      <h2>Grid layouts</h2>
+
+      <table>
+        <tr>
+          <th width="50%">
+            <strong>Centered grid</strong>
+            <br>All cells are horizontally centered within the container.
+          </th>
+          <td width="50%">
+            <code>$av-enable-grid-center: false;</code>
+          </td>
+        </tr>
+        <tr>
+          <th>
+            <strong>Centered cell</strong>
+            <br>Center an individual grid cell within the container.  
+            <br><small><em>N.B. Class should be applied to an individual cell, not the grid container. For example; <code>&lt;div class="grid__cell grid__cell--center"&gt;</code>.</em></small>
+          </th>
+          <td>
+            <code>$av-enable-grid-cell-center: false;</code>
+          </td>
+        </tr>
+        <tr>
+          <th>
+            <strong>Right-aligned grid</strong>
+            <br>All cells are horizontally aligned to the right within the container.
+          </th>
+          <td>
+            <code>$av-enable-grid-right: false;</code>
+          </td>
+        </tr>
+        <tr>
+          <th>
+            <strong>Vertically centered grid</strong>
+            <br>All cells are vertically centered within in the container.
+          </th>
+          <td>
+            <code>$av-enable-grid-middle: false;</code>
+          </td>
+        </tr>
+        <tr>
+          <th>
+            <strong>Vertically bottom-aligned grid</strong>
+            <br>All cells are vertically aligned to the bottom of the container.
+          </th>
+          <td>
+            <code>$av-enable-grid-bottom: false;</code>
+          </td>
+        </tr>
+        <tr>
+          <th>
+            <strong>Gutterless grid</strong>
+            <br>Gutters removed between cells.
+          </th>
+          <td>
+            <code>$av-enable-grid-flush: false;</code>
+          </td>
+        </tr>
+        <tr>
+          <th>
+            <strong>'Tiny' grid gutters</strong>
+            <br>Gutters between cells set to a quarter of the global gutter value. Default: <code>5px</code>.
+          </th>
+          <td>
+            <code>$av-enable-grid-tiny: false;</code>
+          </td>
+        </tr>
+        <tr>
+          <th>
+            <strong>'Small' grid gutters</strong>
+            <br>Gutters between cells set to half of the global gutter value. Default: <code>10px</code>.
+          </th>
+          <td>
+            <code>$av-enable-grid-small: false;</code>
+          </td>
+        </tr>
+        <tr>
+          <th>
+            <strong>'Large' grid gutters</strong>
+            <br>Gutters between cells set to double the global gutter value. Default: <code>40px</code>.
+          </th>
+          <td>
+            <code>$av-enable-grid-large: false;</code>
+          </td>
+        </tr>
+        <tr>
+          <th>
+            <strong>'Huge' grid gutters</strong>
+            <br>Gutters between cells set to quadruple the global gutter value. Default: <code>80px</code>.
+          </th>
+          <td>
+            <code>$av-enable-grid-huge: false;</code>
+          </td>
+        </tr>
+        <tr>
+          <th>
+            <strong>Grid with cells of undefined width</strong>
+            <br>All cells take up an unspecified width set by their content.
+          </th>
+          <td>
+            <code>$av-enable-grid-auto: false;</code>
+          </td>
+        </tr>
+        <tr>
+          <th>
+            <strong>Grid with cells displayed in opposite of source order</strong>
+            <br>Grid cells are displayed in the opposite of their source order.
+          </th>
+          <td>
+            <code>$av-enable-grid-rev: false;</code>
+          </td>
+        </tr>
+      </table>
+
+    </section>
+
+    <hr>
+
+    <h2>Media query mixin</h2>
+    <p>Avalanche includes a media query mixin that makes use of the breakpoint aliases you set. This enables better coupling between your grid and other responsive content items. Usage as follows.</p>
+
+    <pre>@include av-mq(pocket){
+  .content-item{
+    /* responsive CSS */
+  }
+}</pre>
+
+  </main>
+
+  <footer>
+    A little something by <a href="http://twitter.com/colourgarden">Tom Hare</a>
+  </footer>
+
+</body>
+</html>

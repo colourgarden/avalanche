@@ -1,0 +1,311 @@
+/*! Avalanche | MIT License | @colourgarden */
+
+/*------------------------------------*\
+    SETTINGS
+\*------------------------------------*/
+
+$av-namespace:  'grid' !default;  // Prefix namespace for grid layout and cells
+$av-gutter:     20px !default;    // Gutter between grid cells
+
+$av-width-class-namespace:  '' !default;          // Prefix namepspace for width classes
+$av-width-class-style:      'fraction' !default;  // Width class naming style. Can be 'fraction', 'percentage' or 'fragment'
+$av-widths: (
+  2,
+  3,
+  4
+) !default; // Width denominator values. 2 = 1/2, 3 = 1/3 etc. Add/remove as appropriate
+
+$av-enable-responsive:  true !default;
+$av-breakpoints:  (
+  "thumb":            "screen and (max-width: 499px)",
+  "handheld":         "screen and (min-width: 500px) and (max-width: 800px)",
+  "handheld-and-up":  "screen and (min-width: 500px)",
+  "pocket":           "screen and (max-width: 800px)",
+  "lap":              "screen and (min-width: 801px) and (max-width: 1024px)",
+  "lap-and-up":       "screen and (min-width: 801px)",
+  "portable":         "screen and (max-width: 1024px)",
+  "desk":             "screen and (min-width: 1025px)",
+  "widescreen":       "screen and (min-width: 1160px)",
+  "retina":           "screen and (-webkit-min-device-pixel-ratio: 2), screen and (min-resolution: 192dpi), screen and (min-resolution: 2dppx)"
+) !default; // Responsive breakpoints. Add/remove as appropriate
+
+// Enable/disable grid layouts
+$av-enable-grid-center:       false !default;
+$av-enable-grid-cell-center:  false !default;
+$av-enable-grid-right:        false !default;
+$av-enable-grid-middle:       false !default;
+$av-enable-grid-bottom:       false !default;
+$av-enable-grid-flush:        false !default;
+$av-enable-grid-tiny:         false !default;
+$av-enable-grid-small:        false !default;
+$av-enable-grid-large:        false !default;
+$av-enable-grid-huge:         false !default;
+$av-enable-grid-auto:         false !default;
+$av-enable-grid-rev:          false !default;
+
+
+
+
+
+/*------------------------------------*\
+    LOGIC aka THE MAGIC
+\*------------------------------------*/
+
+@function avCreateClassName($style, $numerator, $denominator, $breakpoint-alias){
+
+  $class-name: null;
+
+  @if $style == 'fraction' or $style == 'fragment'{
+    // Set delimiter as slash or text
+    $delimiter: if($style == 'fraction', \/, -of-);
+    $class-name: #{$av-width-class-namespace}\3#{$numerator}#{$delimiter}#{$denominator}#{$breakpoint-alias};
+  } @else{
+    @if $av-width-class-namespace == ''{
+      @error "Percentage value class names require a namespace to be set (see $av-width-class-namespace). Selective escaping (e.g. the 5 of 50) cannot be done.";
+    }
+    $class-width: floor(($numerator / $denominator) * 100);
+    $class-name: #{$av-width-class-namespace}#{$class-width}#{$breakpoint-alias};
+  }
+
+  @return $class-name;
+}
+
+@mixin av-create-widths($widths, $breakpoint-alias: null){
+
+  // Initialise an empty utility map that will eventually contain all our classes
+  $pseudo-class-map: ();
+
+  // Loop widths
+  @each $denominator in $widths{
+
+    // If 1=1, 2=2, 3=3; @for will skip over so create 1/1 class manually
+    @if ($denominator == 1) {
+
+      // Create 1/1 class
+      $class-name: avCreateClassName($av-width-class-style, 1, 1, $breakpoint-alias);
+      .#{$class-name}{
+        width: 100%;
+      }
+      
+    } @else {
+
+      // Loop widths as fractions
+      @for $numerator from 1 to $denominator{
+
+        // Create class name and set width value
+        $class-name: avCreateClassName($av-width-class-style, $numerator,$denominator, $breakpoint-alias);
+        $width-value: percentage($numerator / $denominator);
+
+        // Is this width already in our utility map?
+        $duplicate: map-get($pseudo-class-map, $width-value);
+
+        // Create width class
+        .#{$class-name}{
+
+          // If this width is in utility map, @extend the duplicate, else create a new one
+          @if $duplicate{
+            @extend .#{$duplicate};
+          } @else{
+            width: $width-value;
+          }
+        }
+
+        // Add this class to utility map
+        $add-class: ($width-value: $class-name);
+        $pseudo-class-map: map-merge($pseudo-class-map, $add-class);
+      }
+    }
+  }
+}
+
+@mixin av-mq($alias){
+  
+  // Search breakpoint map for alias
+  $query: map-get($av-breakpoints, $alias);
+
+  // If alias exists, print out media query
+  @if $query{
+    @media #{$query}{
+      @content;
+    }
+  } @else{
+    @error "No breakpoint found for #{$alias}";
+  }
+}
+
+
+
+
+
+/*------------------------------------*\
+    GRID LAYOUT
+\*------------------------------------*/
+
+.#{$av-namespace}{
+  display: block;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  margin-left: -($av-gutter);
+  font-size: 0;
+}
+
+  .#{$av-namespace}__cell{
+    box-sizing: border-box;
+    display: inline-block;
+    width: 100%;
+    padding: 0;
+    padding-left: $av-gutter;
+    margin: 0;
+    vertical-align: top;
+    font-size: 1rem;
+  }
+
+@if $av-enable-grid-center{
+
+  .#{$av-namespace}--center{
+    text-align: center;
+
+    > .#{$av-namespace}__cell{
+      text-align: left;
+    }
+  }
+}
+
+@if $av-enable-grid-cell-center{
+  
+  .#{$av-namespace}__cell--center{
+    display: block;
+    margin: 0 auto;
+  }
+}
+
+@if $av-enable-grid-right{
+  
+  .#{$av-namespace}--right{
+    text-align: right;
+
+    > .#{$av-namespace}__cell{
+      text-align: left;
+    }
+  }
+}
+
+@if $av-enable-grid-middle{
+  
+  .#{$av-namespace}--middle{
+
+    > .#{$av-namespace}__cell{
+      vertical-align: middle;
+    }
+  }
+}
+
+@if $av-enable-grid-bottom{
+  
+  .#{$av-namespace}--bottom{
+
+    > .#{$av-namespace}__cell{
+      vertical-align: bottom;
+    }
+  }
+}
+
+@if $av-enable-grid-flush{
+
+  .#{$av-namespace}--flush{
+    margin-left: 0;
+
+    > .#{$av-namespace}__cell{
+      padding-left: 0;
+    }
+  }
+}
+
+@if $av-enable-grid-tiny{
+
+  .#{$av-namespace}--tiny{
+    margin-left: -($av-gutter / 4);
+
+    > .#{$av-namespace}__cell{
+      padding-left: ($av-gutter / 4);
+    }
+  }
+}
+
+@if $av-enable-grid-small{
+
+  .#{$av-namespace}--small{
+    margin-left: -($av-gutter / 2);
+
+    > .#{$av-namespace}__cell{
+      padding-left: ($av-gutter / 2);
+    }
+  }
+}
+
+@if $av-enable-grid-large{
+
+  .#{$av-namespace}--large{
+    margin-left: -($av-gutter * 2);
+
+    > .#{$av-namespace}__cell{
+      padding-left: ($av-gutter * 2);
+    }
+  }
+}
+
+@if $av-enable-grid-huge{
+
+  .#{$av-namespace}--huge{
+    margin-left: -($av-gutter * 4);
+
+    > .#{$av-namespace}__cell{
+      padding-left: ($av-gutter * 4);
+    }
+  }
+}
+
+@if $av-enable-grid-auto{
+  
+  .#{$av-namespace}--auto{
+
+    > .#{$av-namespace}__cell{
+      width: auto;
+    }
+  }
+}
+
+@if $av-enable-grid-rev{
+  
+  .#{$av-namespace}--rev{
+    direction: rtl;
+
+    > .#{$av-namespace}__cell{
+      direction: ltr;
+    }
+  }
+}
+
+
+
+
+
+/*------------------------------------*\
+    GRID WIDTHS
+\*------------------------------------*/
+
+// Loop default widths
+@include av-create-widths($av-widths);
+
+// If responsive flag enabled, loop breakpoint widths
+@if $av-enable-responsive{
+  
+  @each $alias, $query in $av-breakpoints{
+
+    // Create each media query
+    @media #{$query}{
+      @include av-create-widths($av-widths, --#{$alias});    
+    }
+  }
+}

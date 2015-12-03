@@ -1,0 +1,18 @@
+// Quick start, kitchen sink CSS file
+
+$av-widths: ( 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12 );
+
+$av-enable-grid-center:       true;
+$av-enable-grid-cell-center:  true;
+$av-enable-grid-right:        true;
+$av-enable-grid-middle:       true;
+$av-enable-grid-bottom:       true;
+$av-enable-grid-flush:        true;
+$av-enable-grid-tiny:         true;
+$av-enable-grid-small:        true;
+$av-enable-grid-large:        true;
+$av-enable-grid-huge:         true;
+$av-enable-grid-auto:         true;
+$av-enable-grid-rev:          true;
+
+@import "avalanche";
