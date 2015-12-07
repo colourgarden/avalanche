@@ -177,11 +177,18 @@ table{
 th, td{
   padding: 15px;
   border: 1px #ddd solid;
+
+  @include av-mq(thumb){
+    display: block;
+  }
 }
 th{
   vertical-align: top;
   font-weight: normal;
   text-align: left;
+}
+table pre{
+  white-space: pre-wrap;
 }
 footer{
   padding-top: 20px;
