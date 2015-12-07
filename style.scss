@@ -77,9 +77,14 @@ h5{
   margin: 0;
   font-size: 1.125em;
 
+  
   code{
-    float: right;
-    font-size: 1.25em;
+    display: block;
+
+    @include av-mq(lap-and-up){
+      float: right;
+      font-size: 1.25em;
+    }
   }
 }
 p{
