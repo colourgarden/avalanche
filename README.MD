@@ -129,6 +129,10 @@ Avalanche includes a media query mixin that makes use of the breakpoint aliases 
 }
 ```
 
+## Browser support
+
+All modern browsers are supported and Internet Explorer from IE9 upwards. If IE8 support is required then all that is needed is a pixel-value to be set for `font-size` on `.grid__cell`. This is due to IE8 not supporting rem units. Use of [autoprefixer](https://github.com/postcss/autoprefixer) is recommended which will handle this for you automatically.
+
 ## Questions
 
 If you have any questions or need some help then feel free to tweet me at [@colourgarden](http://twitter.com/colourgarden) or [open an issue](https://github.com/colourgarden/avalanche/issues/new).
