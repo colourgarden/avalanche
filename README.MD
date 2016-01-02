@@ -18,7 +18,7 @@ View <a href="http://colourgarden.net/avalanche/">the demo</a> to see Avalanche 
 
 ## Installation
 
-1. Copy `_avalanche.scss` into your project (vendor folder recommended `@include "vendor/avalanche"`)
+1. Copy `_avalanche.scss` into your project (vendor folder recommended `@import "vendor/avalanche"`)
 2. Override settings to fit your requirements or use the defaults
 3. Compile!
 
