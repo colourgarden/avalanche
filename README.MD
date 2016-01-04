@@ -18,9 +18,17 @@ View <a href="http://colourgarden.net/avalanche/">the demo</a> to see Avalanche 
 
 ## Installation
 
-1. Copy `_avalanche.scss` into your project (vendor folder recommended `@import "vendor/avalanche"`)
+1. Import `_avalanche.scss` to your project via Bower, NPM or manually copying to vendor folder (`@import "vendor/avalanche"`)
 2. Override settings to fit your requirements or use the defaults
 3. Compile!
+
+### Bower
+
+`bower install --save avalanche-css`
+
+### NPM
+
+`npm install --save avalanche-css`
 
 ## Usage
 
