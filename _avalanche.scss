@@ -86,7 +86,7 @@ $av-enable-grid-rev:          false !default;
       .#{$class-name}{
         width: 100%;
       }
-      
+
     } @else {
 
       // Loop widths as fractions
@@ -119,7 +119,7 @@ $av-enable-grid-rev:          false !default;
 }
 
 @mixin av-mq($alias){
-  
+
   // Search breakpoint map for alias
   $query: map-get($av-breakpoints, $alias);
 
@@ -173,7 +173,7 @@ $av-enable-grid-rev:          false !default;
 }
 
 @if $av-enable-grid-cell-center{
-  
+
   .#{$av-namespace}__cell--center{
     display: block;
     margin: 0 auto;
@@ -181,7 +181,7 @@ $av-enable-grid-rev:          false !default;
 }
 
 @if $av-enable-grid-right{
-  
+
   .#{$av-namespace}--right{
     text-align: right;
 
@@ -192,7 +192,7 @@ $av-enable-grid-rev:          false !default;
 }
 
 @if $av-enable-grid-middle{
-  
+
   .#{$av-namespace}--middle{
 
     > .#{$av-namespace}__cell{
@@ -202,7 +202,7 @@ $av-enable-grid-rev:          false !default;
 }
 
 @if $av-enable-grid-bottom{
-  
+
   .#{$av-namespace}--bottom{
 
     > .#{$av-namespace}__cell{
@@ -267,7 +267,7 @@ $av-enable-grid-rev:          false !default;
 }
 
 @if $av-enable-grid-auto{
-  
+
   .#{$av-namespace}--auto{
 
     > .#{$av-namespace}__cell{
@@ -277,7 +277,7 @@ $av-enable-grid-rev:          false !default;
 }
 
 @if $av-enable-grid-rev{
-  
+
   .#{$av-namespace}--rev{
     direction: rtl;
 
@@ -300,12 +300,12 @@ $av-enable-grid-rev:          false !default;
 
 // If responsive flag enabled, loop breakpoint widths
 @if $av-enable-responsive{
-  
+
   @each $alias, $query in $av-breakpoints{
 
     // Create each media query
     @media #{$query}{
-      @include av-create-widths($av-widths, --#{$alias});    
+      @include av-create-widths($av-widths, --#{$alias});
     }
   }
 }
