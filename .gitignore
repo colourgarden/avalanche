@@ -1,4 +1,5 @@
 .DS_Store
 *.css
+!avalanche.min.css
 *.map
 .sass-cache
