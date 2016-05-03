@@ -160,7 +160,7 @@ $av-enable-grid-rev:          false !default;
   padding: 0;
   margin: 0;
   margin-left: -($av-gutter);
-  font-size: 0;
+  font-size: 0rem;
 }
 
   .#{$av-namespace}__cell{
