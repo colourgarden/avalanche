@@ -7,7 +7,7 @@
 $av-namespace:  'grid' !default;  // Prefix namespace for grid layout and cells
 $av-gutter:     20px !default;    // Gutter between grid cells
 
-$av-width-class-namespace:  '' !default;          // Prefix namepspace for width classes
+$av-width-class-namespace:  '' !default;          // Prefix namespace for width classes. For example; 'col-'
 $av-width-class-style:      'fraction' !default;  // Width class naming style. Can be 'fraction', 'percentage' or 'fragment'
 $av-widths: (
   2,
@@ -51,17 +51,21 @@ $av-enable-grid-rev:          false !default;
     LOGIC aka THE MAGIC
 \*------------------------------------*/
 
-@function escapeNumerator($numerator){
-  $numerator-as-string: inspect($numerator);
-  $escaped-numerator: '';
+@function escapeNumerator($numerator, $namespace: ''){
+  @if($namespace == ''){
+    $numerator-as-string: inspect($numerator);
+    $escaped-numerator: '';
 
-  // Loop through all digits in the numerator and escape individually
-  @for $i from 1 through str-length($numerator-as-string){
-    $digit: str-slice($numerator-as-string, $i, $i);
-    $escaped-numerator: $escaped-numerator+\3+$digit;
+    // Loop through all digits in the numerator and escape individually
+    @for $i from 1 through str-length($numerator-as-string){
+      $digit: str-slice($numerator-as-string, $i, $i);
+      $escaped-numerator: $escaped-numerator+\3+$digit;
+    }
+
+    @return $escaped-numerator;
+  } @else {
+    @return $numerator;
   }
-
-  @return $escaped-numerator;
 }
 
 @function avCreateClassName($style, $numerator, $denominator, $breakpoint-alias){
@@ -71,7 +75,7 @@ $av-enable-grid-rev:          false !default;
   @if $style == 'fraction' or $style == 'fragment'{
     // Set delimiter as slash or text
     $delimiter: if($style == 'fraction', \/, -of-);
-    $class-name: #{$av-width-class-namespace}#{escapeNumerator($numerator)}#{$delimiter}#{$denominator}#{$breakpoint-alias};
+    $class-name: #{$av-width-class-namespace}#{escapeNumerator($numerator, $av-width-class-namespace)}#{$delimiter}#{$denominator}#{$breakpoint-alias};
   } @else{
     @if $av-width-class-namespace == ''{
       @error "Percentage value class names require a namespace to be set (see $av-width-class-namespace). Selective escaping (e.g. the 5 of 50) cannot be done.";
