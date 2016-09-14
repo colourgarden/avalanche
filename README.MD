@@ -1,3 +1,7 @@
+**Used Avalanche for a project? [Let me know](http://twitter.com/colourgarden) and get featured on the website!**
+
+---
+
 # Avalanche CSS grid system
 
 **Superclean, powerful, responsive, Sass-based, BEM-syntax CSS grid system**
