@@ -64,6 +64,18 @@ Naming style of width classes. Default: `'fraction'`. Options: `fraction` (1/2, 
 Sass list of width denominator values (when expressed as a fraction). For example, 2 produces 1/2 width class, 3 produces 1/3 and 2/3 width classes etc. Default: `( 2, 3, 4 )`.  
 *N.B. This setting has a large impact on the size of your compiled CSS. Avoid bloat by inputting just the numbers you'll use.*
 
+**`$av-modifier-class-chain`**  
+Chain between block and modifier in class names. Default `'--'`.
+
+**`$av-element-name`**
+Element name in class names. Default `'cell'`.
+
+**`$av-element-class-chain`**
+Chain between block and element in class names. Default `'__'`.
+
+**`$av-breakpoint-class-chain`**
+Chain between width and breakpoint in class names. Default `'--'`.
+
 **`$av-enable-responsive`**  
 Enable/disable the inclusion of responsive width classes. With this enabled, class names (for denominators set above) will be created for each of your breakpoint aliases (set below). Default: `true`.
 

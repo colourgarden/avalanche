@@ -15,6 +15,11 @@ $av-widths: (
   4
 ) !default; // Width denominator values. 2 = 1/2, 3 = 1/3 etc. Add/remove as appropriate
 
+$av-element-name: 'cell' !default;  // Element name
+$av-element-class-chain: '__' !default;  // Chain between block and element
+$av-modifier-class-chain: '--' !default;  // Chain between block and modifier
+$av-breakpoint-class-chain: '--' !default;  // Chain between width and breakpoint
+
 $av-enable-responsive:  true !default;
 $av-breakpoints:  (
   "thumb":            "screen and (max-width: 499px)",
@@ -68,7 +73,7 @@ $av-enable-grid-rev:          false !default;
   }
 }
 
-@function avCreateClassName($style, $numerator, $denominator, $breakpoint-alias){
+@function avCreateWidthClassName($style, $numerator, $denominator, $breakpoint-alias){
 
   $class-name: null;
 
@@ -87,6 +92,26 @@ $av-enable-grid-rev:          false !default;
   @return $class-name;
 }
 
+@function avCreateBlockClassName($modifier: ''){
+  @if $modifier == '' {
+    @return #{$av-namespace};
+  }
+
+  @return #{$av-namespace}#{$av-modifier-class-chain}#{$modifier};
+}
+
+@function avCreateElementClassName($modifier: ''){
+
+  $element-class-name: #{avCreateBlockClassName()}#{$av-element-class-chain}#{$av-element-name};
+
+  @if $modifier == '' {
+    @return $element-class-name;
+  }
+
+  @return #{$element-class-name}#{$av-modifier-class-chain}#{$modifier};
+
+}
+
 @mixin av-create-widths($widths, $breakpoint-alias: null){
 
   // Initialise an empty utility map that will eventually contain all our classes
@@ -99,7 +124,7 @@ $av-enable-grid-rev:          false !default;
     @if ($denominator == 1) {
 
       // Create 1/1 class
-      $class-name: avCreateClassName($av-width-class-style, 1, 1, $breakpoint-alias);
+      $class-name: avCreateWidthClassName($av-width-class-style, 1, 1, $breakpoint-alias);
       .#{$class-name}{
         width: 100%;
       }
@@ -110,7 +135,7 @@ $av-enable-grid-rev:          false !default;
       @for $numerator from 1 to $denominator{
 
         // Create class name and set width value
-        $class-name: avCreateClassName($av-width-class-style, $numerator,$denominator, $breakpoint-alias);
+        $class-name: avCreateWidthClassName($av-width-class-style, $numerator,$denominator, $breakpoint-alias);
         $width-value: percentage($numerator / $denominator);
 
         // Is this width already in our utility map?
@@ -158,7 +183,7 @@ $av-enable-grid-rev:          false !default;
     GRID LAYOUT
 \*------------------------------------*/
 
-.#{$av-namespace}{
+.#{avCreateBlockClassName()}{
   display: block;
   list-style: none;
   padding: 0;
@@ -167,23 +192,23 @@ $av-enable-grid-rev:          false !default;
   font-size: 0rem;
 }
 
-  .#{$av-namespace}__cell{
-    box-sizing: border-box;
-    display: inline-block;
-    width: 100%;
-    padding: 0;
-    padding-left: $av-gutter;
-    margin: 0;
-    vertical-align: top;
-    font-size: 1rem;
-  }
+.#{avCreateElementClassName()}{
+  box-sizing: border-box;
+  display: inline-block;
+  width: 100%;
+  padding: 0;
+  padding-left: $av-gutter;
+  margin: 0;
+  vertical-align: top;
+  font-size: 1rem;
+}
 
 @if $av-enable-grid-center{
 
-  .#{$av-namespace}--center{
+  .#{avCreateBlockClassName('center')}{
     text-align: center;
 
-    > .#{$av-namespace}__cell{
+    > .#{avCreateElementClassName()}{
       text-align: left;
     }
   }
@@ -191,7 +216,7 @@ $av-enable-grid-rev:          false !default;
 
 @if $av-enable-grid-cell-center{
 
-  .#{$av-namespace}__cell--center{
+  .#{avCreateElementClassName('center')}{
     display: block;
     margin: 0 auto;
   }
@@ -199,10 +224,10 @@ $av-enable-grid-rev:          false !default;
 
 @if $av-enable-grid-right{
 
-  .#{$av-namespace}--right{
+  .#{avCreateBlockClassName('right')}{
     text-align: right;
 
-    > .#{$av-namespace}__cell{
+    > .#{avCreateElementClassName()}{
       text-align: left;
     }
   }
@@ -210,9 +235,9 @@ $av-enable-grid-rev:          false !default;
 
 @if $av-enable-grid-middle{
 
-  .#{$av-namespace}--middle{
+  .#{avCreateBlockClassName('middle')}{
 
-    > .#{$av-namespace}__cell{
+    > .#{avCreateElementClassName()}{
       vertical-align: middle;
     }
   }
@@ -220,9 +245,9 @@ $av-enable-grid-rev:          false !default;
 
 @if $av-enable-grid-bottom{
 
-  .#{$av-namespace}--bottom{
+  .#{avCreateBlockClassName('bottom')}{
 
-    > .#{$av-namespace}__cell{
+    > .#{avCreateElementClassName()}{
       vertical-align: bottom;
     }
   }
@@ -230,10 +255,10 @@ $av-enable-grid-rev:          false !default;
 
 @if $av-enable-grid-flush{
 
-  .#{$av-namespace}--flush{
+  .#{avCreateBlockClassName('flush')}{
     margin-left: 0;
 
-    > .#{$av-namespace}__cell{
+    > .#{avCreateElementClassName()}{
       padding-left: 0;
     }
   }
@@ -241,10 +266,10 @@ $av-enable-grid-rev:          false !default;
 
 @if $av-enable-grid-tiny{
 
-  .#{$av-namespace}--tiny{
+  .#{avCreateBlockClassName('tiny')}{
     margin-left: -($av-gutter / 4);
 
-    > .#{$av-namespace}__cell{
+    > .#{avCreateElementClassName()}{
       padding-left: ($av-gutter / 4);
     }
   }
@@ -252,10 +277,10 @@ $av-enable-grid-rev:          false !default;
 
 @if $av-enable-grid-small{
 
-  .#{$av-namespace}--small{
+  .#{avCreateBlockClassName('small')}{
     margin-left: -($av-gutter / 2);
 
-    > .#{$av-namespace}__cell{
+    > .#{avCreateElementClassName()}{
       padding-left: ($av-gutter / 2);
     }
   }
@@ -263,10 +288,10 @@ $av-enable-grid-rev:          false !default;
 
 @if $av-enable-grid-large{
 
-  .#{$av-namespace}--large{
+  .#{avCreateBlockClassName('large')}{
     margin-left: -($av-gutter * 2);
 
-    > .#{$av-namespace}__cell{
+    > .#{avCreateElementClassName()}{
       padding-left: ($av-gutter * 2);
     }
   }
@@ -274,10 +299,10 @@ $av-enable-grid-rev:          false !default;
 
 @if $av-enable-grid-huge{
 
-  .#{$av-namespace}--huge{
+  .#{avCreateBlockClassName('huge')}{
     margin-left: -($av-gutter * 4);
 
-    > .#{$av-namespace}__cell{
+    > .#{avCreateElementClassName()}{
       padding-left: ($av-gutter * 4);
     }
   }
@@ -285,9 +310,9 @@ $av-enable-grid-rev:          false !default;
 
 @if $av-enable-grid-auto{
 
-  .#{$av-namespace}--auto{
+  .#{avCreateBlockClassName('auto')}{
 
-    > .#{$av-namespace}__cell{
+    > .#{avCreateElementClassName()}{
       width: auto;
     }
   }
@@ -295,10 +320,10 @@ $av-enable-grid-rev:          false !default;
 
 @if $av-enable-grid-rev{
 
-  .#{$av-namespace}--rev{
+  .#{avCreateBlockClassName('rev')}{
     direction: rtl;
 
-    > .#{$av-namespace}__cell{
+    > .#{avCreateElementClassName()}{
       direction: ltr;
     }
   }
@@ -322,7 +347,7 @@ $av-enable-grid-rev:          false !default;
 
     // Create each media query
     @media #{$query}{
-      @include av-create-widths($av-widths, --#{$alias});
+      @include av-create-widths($av-widths, #{$av-breakpoint-class-chain}#{$alias});
     }
   }
 }
