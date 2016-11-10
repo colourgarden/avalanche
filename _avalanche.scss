@@ -15,8 +15,7 @@ $av-widths: (
   4
 ) !default; // Width denominator values. 2 = 1/2, 3 = 1/3 etc. Add/remove as appropriate
 
-$av-element-name: 'cell' !default;  // Element name
-$av-element-class-chain: '__' !default;  // Chain between block and element
+$av-element-name: 'grid__cell' !default;  // Element name
 $av-modifier-class-chain: '--' !default;  // Chain between block and modifier
 $av-breakpoint-class-chain: '--' !default;  // Chain between width and breakpoint
 
@@ -101,14 +100,11 @@ $av-enable-grid-rev:          false !default;
 }
 
 @function avCreateElementClassName($modifier: ''){
-
-  $element-class-name: #{avCreateBlockClassName()}#{$av-element-class-chain}#{$av-element-name};
-
   @if $modifier == '' {
-    @return $element-class-name;
+    @return #{$av-element-name};
   }
 
-  @return #{$element-class-name}#{$av-modifier-class-chain}#{$modifier};
+  @return #{$av-element-name}#{$av-modifier-class-chain}#{$modifier};
 
 }
 

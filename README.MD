@@ -65,10 +65,7 @@ Sass list of width denominator values (when expressed as a fraction). For exampl
 *N.B. This setting has a large impact on the size of your compiled CSS. Avoid bloat by inputting just the numbers you'll use.*
 
 **`$av-element-name`**  
-Element name in class names. Default `'cell'`.
-
-**`$av-element-class-chain`**  
-Chain between block and element in class names. Default `'__'`.
+Element name in class names. Default `'grid__cell'`.
 
 **`$av-modifier-class-chain`**  
 Chain between block and modifier in class names. Default `'--'`.
