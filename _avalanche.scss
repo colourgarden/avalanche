@@ -4,8 +4,13 @@
     SETTINGS
 \*------------------------------------*/
 
-$av-namespace:  'grid' !default;  // Prefix namespace for grid layout and cells
-$av-gutter:     20px !default;    // Gutter between grid cells
+$av-namespace:              'grid' !default;      // Prefix namespace for grid layout and cells
+$av-element-name:           'cell' !default;      // Element/cell name
+$av-element-class-chain:    '__' !default;        // Chain characters between block and element
+$av-modifier-class-chain:   '--' !default;        // Chain characters between block and modifier
+$av-breakpoint-class-chain: '--' !default;        // Chain characters between width and breakpoint
+
+$av-gutter:                 20px !default;        // Gutter between grid cells
 
 $av-width-class-namespace:  '' !default;          // Prefix namespace for width classes. For example; 'col-'
 $av-width-class-style:      'fraction' !default;  // Width class naming style. Can be 'fraction', 'percentage' or 'fragment'
@@ -14,10 +19,6 @@ $av-widths: (
   3,
   4
 ) !default; // Width denominator values. 2 = 1/2, 3 = 1/3 etc. Add/remove as appropriate
-
-$av-element-name: 'grid__cell' !default;  // Element name
-$av-modifier-class-chain: '--' !default;  // Chain between block and modifier
-$av-breakpoint-class-chain: '--' !default;  // Chain between width and breakpoint
 
 $av-enable-responsive:  true !default;
 $av-breakpoints:  (
@@ -101,10 +102,10 @@ $av-enable-grid-rev:          false !default;
 
 @function avCreateElementClassName($modifier: ''){
   @if $modifier == '' {
-    @return #{$av-element-name};
+    @return #{$av-namespace}#{$av-element-class-chain}#{$av-element-name};
   }
 
-  @return #{$av-element-name}#{$av-modifier-class-chain}#{$modifier};
+  @return #{$av-namespace}#{$av-element-class-chain}#{$av-element-name}#{$av-modifier-class-chain}#{$modifier};
 
 }
 
