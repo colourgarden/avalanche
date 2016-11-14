@@ -1,8 +1,6 @@
 linters:
   Comment:
     allowed: "/*!"
-  EmptyLineBetweenBlocks:
-    enabled: false
   FinalNewline:
     enabled: false
   Indentation:

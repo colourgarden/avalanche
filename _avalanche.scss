@@ -100,6 +100,7 @@ $av-enable-grid-rev:          false !default;
 
       // Create 1/1 class
       $class-name: avCreateClassName($av-width-class-style, 1, 1, $breakpoint-alias);
+
       .#{$class-name}{
         width: 100%;
       }
