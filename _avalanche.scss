@@ -17,16 +17,16 @@ $av-widths: (
 
 $av-enable-responsive:  true !default;
 $av-breakpoints:  (
-  "thumb":            "screen and (max-width: 499px)",
-  "handheld":         "screen and (min-width: 500px) and (max-width: 800px)",
-  "handheld-and-up":  "screen and (min-width: 500px)",
-  "pocket":           "screen and (max-width: 800px)",
-  "lap":              "screen and (min-width: 801px) and (max-width: 1024px)",
-  "lap-and-up":       "screen and (min-width: 801px)",
-  "portable":         "screen and (max-width: 1024px)",
-  "desk":             "screen and (min-width: 1025px)",
-  "widescreen":       "screen and (min-width: 1160px)",
-  "retina":           "screen and (-webkit-min-device-pixel-ratio: 2), screen and (min-resolution: 192dpi), screen and (min-resolution: 2dppx)"
+  'thumb':            'screen and (max-width: 499px)',
+  'handheld':         'screen and (min-width: 500px) and (max-width: 800px)',
+  'handheld-and-up':  'screen and (min-width: 500px)',
+  'pocket':           'screen and (max-width: 800px)',
+  'lap':              'screen and (min-width: 801px) and (max-width: 1024px)',
+  'lap-and-up':       'screen and (min-width: 801px)',
+  'portable':         'screen and (max-width: 1024px)',
+  'desk':             'screen and (min-width: 1025px)',
+  'widescreen':       'screen and (min-width: 1160px)',
+  'retina':           'screen and (-webkit-min-device-pixel-ratio: 2), screen and (min-resolution: 192dpi), screen and (min-resolution: 2dppx)'
 ) !default; // Responsive breakpoints. Add/remove as appropriate
 
 // Enable/disable grid layouts
