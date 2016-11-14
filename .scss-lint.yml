@@ -5,5 +5,3 @@ linters:
     allow_non_nested_indentation: true
   PlaceholderInExtend:
     enabled: false
-  ZeroUnit:
-    enabled: false

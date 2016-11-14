@@ -161,7 +161,7 @@ $av-enable-grid-rev:          false !default;
 
 .#{$av-namespace} {
   display: block;
-  font-size: 0rem;
+  font-size: 0;
   list-style: none;
   margin: 0;
   margin-left: -($av-gutter);
