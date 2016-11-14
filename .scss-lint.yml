@@ -1,0 +1,25 @@
+linters:
+  Comment:
+    enabled: false
+  EmptyLineBetweenBlocks:
+    enabled: false
+  FinalNewline:
+    enabled: false
+  Indentation:
+    enabled: false
+  NameFormat:
+    enabled: false
+  PlaceholderInExtend:
+    enabled: false
+  PropertySortOrder:
+    enabled: false
+  SpaceAfterComma:
+    enabled: false
+  SpaceAroundOperator:
+    enabled: false
+  SpaceBeforeBrace:
+    enabled: false
+  StringQuotes:
+    enabled: false
+  ZeroUnit:
+    enabled: false
