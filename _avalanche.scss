@@ -161,22 +161,22 @@ $av-enable-grid-rev:          false !default;
 
 .#{$av-namespace}{
   display: block;
+  font-size: 0rem;
   list-style: none;
-  padding: 0;
   margin: 0;
   margin-left: -($av-gutter);
-  font-size: 0rem;
+  padding: 0;
 }
 
   .#{$av-namespace}__cell{
     box-sizing: border-box;
     display: inline-block;
-    width: 100%;
+    font-size: 1rem;
+    margin: 0;
     padding: 0;
     padding-left: $av-gutter;
-    margin: 0;
     vertical-align: top;
-    font-size: 1rem;
+    width: 100%;
   }
 
 @if $av-enable-grid-center{

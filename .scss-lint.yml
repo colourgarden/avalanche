@@ -5,8 +5,6 @@ linters:
     allow_non_nested_indentation: true
   PlaceholderInExtend:
     enabled: false
-  PropertySortOrder:
-    enabled: false
   SpaceAfterComma:
     enabled: false
   SpaceAroundOperator:
