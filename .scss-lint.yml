@@ -3,8 +3,6 @@ linters:
     allowed: "/*!"
   Indentation:
     allow_non_nested_indentation: true
-  NameFormat:
-    enabled: false
   PlaceholderInExtend:
     enabled: false
   PropertySortOrder:
