@@ -1,8 +1,8 @@
 /*! Avalanche | MIT License | @colourgarden */
 
-/*------------------------------------*\
-    SETTINGS
-\*------------------------------------*/
+////////////////////////////////////////
+//  SETTINGS
+////////////////////////////////////////
 
 $av-namespace:  'grid' !default;  // Prefix namespace for grid layout and cells
 $av-gutter:     20px !default;    // Gutter between grid cells
@@ -47,9 +47,9 @@ $av-enable-grid-rev:          false !default;
 
 
 
-/*------------------------------------*\
-    LOGIC aka THE MAGIC
-\*------------------------------------*/
+////////////////////////////////////////
+//  LOGIC aka THE MAGIC
+////////////////////////////////////////
 
 @function escapeNumerator($numerator, $namespace: ''){
   @if($namespace == ''){
@@ -154,9 +154,9 @@ $av-enable-grid-rev:          false !default;
 
 
 
-/*------------------------------------*\
-    GRID LAYOUT
-\*------------------------------------*/
+////////////////////////////////////////
+//  GRID LAYOUT
+////////////////////////////////////////
 
 .#{$av-namespace}{
   display: block;
@@ -308,9 +308,9 @@ $av-enable-grid-rev:          false !default;
 
 
 
-/*------------------------------------*\
-    GRID WIDTHS
-\*------------------------------------*/
+////////////////////////////////////////
+//  GRID WIDTHS
+////////////////////////////////////////
 
 // Loop default widths
 @include av-create-widths($av-widths);
