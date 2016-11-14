@@ -2,7 +2,7 @@ linters:
   Comment:
     allowed: "/*!"
   Indentation:
-    enabled: false
+    allow_non_nested_indentation: true
   NameFormat:
     enabled: false
   PlaceholderInExtend:
