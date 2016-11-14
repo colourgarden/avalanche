@@ -1,8 +1,6 @@
 linters:
   Comment:
     allowed: "/*!"
-  FinalNewline:
-    enabled: false
   Indentation:
     enabled: false
   NameFormat:
