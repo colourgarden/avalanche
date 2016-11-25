@@ -1,7 +1,3 @@
-**Used Avalanche for a project? [Let me know](http://twitter.com/colourgarden) and get featured on the website!**
-
----
-
 # Avalanche CSS grid system
 
 **Superclean, powerful, responsive, Sass-based, BEM-syntax CSS grid system**
@@ -49,6 +45,18 @@ Example of a two column, responsive, centered grid. All grid layout classes and 
 
 **`$av-namespace`**  
 Global prefix for layout and cell class names. Default: `grid`.
+
+**`$av-element-name`**
+Element (in a BEM context) or grid cell name. Default: `cell`.
+
+**`$av-element-class-chain`**
+Chain characters/separator between BEM block and element. Default: `__`.
+
+**`$av-modifier-class-chain`**
+Chain characters/separator between BEM block and modifier. Default: `--`.
+
+**`$av-breakpoint-class-chain`**
+Chain characters/separator between width class and breakpoint. Default: `--`.
 
 **`$av-gutter`**  
 Gutter width between cells. Default: `20px`.
