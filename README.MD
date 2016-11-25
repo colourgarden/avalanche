@@ -1,7 +1,3 @@
-**Used Avalanche for a project? [Let me know](http://twitter.com/colourgarden) and get featured on the website!**
-
----
-
 # Avalanche CSS grid system
 
 **Superclean, powerful, responsive, Sass-based, BEM-syntax CSS grid system**
@@ -50,6 +46,18 @@ Example of a two column, responsive, centered grid. All grid layout classes and 
 **`$av-namespace`**  
 Global prefix for layout and cell class names. Default: `grid`.
 
+**`$av-element-name`**
+Element (in a BEM context) or grid cell name. Default: `cell`.
+
+**`$av-element-class-chain`**
+Chain characters/separator between BEM block and element. Default: `__`.
+
+**`$av-modifier-class-chain`**
+Chain characters/separator between BEM block and modifier. Default: `--`.
+
+**`$av-breakpoint-class-chain`**
+Chain characters/separator between width class and breakpoint. Default: `--`.
+
 **`$av-gutter`**  
 Gutter width between cells. Default: `20px`.
 
@@ -63,15 +71,6 @@ Naming style of width classes. Default: `'fraction'`. Options: `fraction` (1/2, 
 **`$av-widths`**  
 Sass list of width denominator values (when expressed as a fraction). For example, 2 produces 1/2 width class, 3 produces 1/3 and 2/3 width classes etc. Default: `( 2, 3, 4 )`.  
 *N.B. This setting has a large impact on the size of your compiled CSS. Avoid bloat by inputting just the numbers you'll use.*
-
-**`$av-element-name`**  
-Element name in class names. Default `'grid__cell'`.
-
-**`$av-modifier-class-chain`**  
-Chain between block and modifier in class names. Default `'--'`.
-
-**`$av-breakpoint-class-chain`**  
-Chain between width and breakpoint in class names. Default `'--'`.
 
 **`$av-enable-responsive`**  
 Enable/disable the inclusion of responsive width classes. With this enabled, class names (for denominators set above) will be created for each of your breakpoint aliases (set below). Default: `true`.
