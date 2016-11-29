@@ -47,6 +47,7 @@ $av-enable-grid-large:        false !default;
 $av-enable-grid-huge:         false !default;
 $av-enable-grid-auto:         false !default;
 $av-enable-grid-rev:          false !default;
+$av-enable-debug:             true !default;
 
 
 
@@ -345,6 +346,47 @@ $av-enable-grid-rev:          false !default;
     // Create each media query
     @media #{$query}{
       @include av-create-widths($av-widths, #{$av-breakpoint-class-chain}#{$alias});
+    }
+  }
+}
+
+/*------------------------------------*\
+    DEBUG
+\*------------------------------------*/
+
+// If debug flag enabled, create pseudo element
+@if $av-enable-debug {
+
+  html:after {
+    background: #fbfbfb url('http://colourgarden.net/avalanche/favicon.ico') no-repeat;
+    background-size: 16px 16px;
+    background-position: 4px center;
+    border-color: #ddd;
+    border-style: solid;
+    border-width: 1px 0 0 1px;
+    bottom: 0;
+    color: #494949;
+    content: '';
+    display: none;
+    font-family: monospace;
+    font-size: 10px;
+    height: auto;
+    padding: 5px 5px 5px 24px;
+    position: fixed;
+    right: 0;
+    width: auto;
+    z-index: 100000;
+  }
+
+  // Loop breakpoint widths
+  @each $alias, $query in $av-breakpoints{
+
+    // Create each media query
+    @include av-mq($alias){
+      html:after {
+        content: 'Breakpoint: #{$alias}';
+        display: block;
+      }
     }
   }
 }
