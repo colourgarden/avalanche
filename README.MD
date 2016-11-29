@@ -148,6 +148,10 @@ Avalanche includes a media query mixin that makes use of the breakpoint aliases 
   }
 }
 ```
+## Debug
+
+**`$av-enable-debug`**  
+Enable debug mode to view the current breakpoint in the bottom right corner of your browser.
 
 ## Browser support
 
