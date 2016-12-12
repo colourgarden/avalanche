@@ -51,7 +51,7 @@ $av-enable-grid-rev:          false !default;
  * LOGIC aka THE MAGIC
  */
 @function escapeNumerator($numerator, $namespace: '') {
-  @if($namespace == '') {
+  @if ($namespace == '') {
     $numerator-as-string: inspect($numerator);
     $escaped-numerator: '';
 
