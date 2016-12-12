@@ -104,7 +104,6 @@ $av-enable-grid-rev:          false !default;
   }
 
   @return #{$av-namespace}#{$av-element-class-chain}#{$av-element-name}#{$av-modifier-class-chain}#{$modifier};
-
 }
 
 @mixin av-create-widths($widths, $breakpoint-alias: null) {
@@ -123,7 +122,6 @@ $av-enable-grid-rev:          false !default;
       .#{$class-name} {
         width: 100%;
       }
-
     }
 
     @else {
