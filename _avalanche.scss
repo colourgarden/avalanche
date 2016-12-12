@@ -62,7 +62,8 @@ $av-enable-grid-rev:          false !default;
     }
 
     @return $escaped-numerator;
-  } @else {
+  }
+  @else {
     @return $numerator;
   }
 }
@@ -75,7 +76,8 @@ $av-enable-grid-rev:          false !default;
     // Set delimiter as slash or text
     $delimiter: if($style == 'fraction', \/, -of-);
     $class-name: #{$av-width-class-namespace}#{escapeNumerator($numerator, $av-width-class-namespace)}#{$delimiter}#{$denominator}#{$breakpoint-alias};
-  } @else {
+  }
+  @else {
     @if $av-width-class-namespace == '' {
       @error "Percentage value class names require a namespace to be set (see $av-width-class-namespace). Selective escaping (e.g. the 5 of 50) cannot be done.";
     }
@@ -120,7 +122,8 @@ $av-enable-grid-rev:          false !default;
         width: 100%;
       }
 
-    } @else {
+    }
+    @else {
 
       // Loop widths as fractions
       @for $numerator from 1 to $denominator {
@@ -138,7 +141,8 @@ $av-enable-grid-rev:          false !default;
           // If this width is in utility map, @extend the duplicate, else create a new one
           @if $duplicate {
             @extend .#{$duplicate};
-          } @else {
+          }
+          @else {
             width: $width-value;
           }
         }
@@ -161,7 +165,8 @@ $av-enable-grid-rev:          false !default;
     @media #{$query} {
       @content;
     }
-  } @else {
+  }
+  @else {
     @error "No breakpoint found for #{$alias}";
   }
 }
