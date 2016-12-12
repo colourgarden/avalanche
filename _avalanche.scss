@@ -184,7 +184,7 @@ $av-enable-grid-rev:          false !default;
   padding: 0;
   margin: 0;
   margin-left: -($av-gutter);
-  font-size: 0rem;
+  font-size: 0;
 }
 
 .#{avCreateElementClassName()} {
