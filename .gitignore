@@ -3,3 +3,4 @@
 !avalanche.min.css
 *.map
 .sass-cache
+node_modules/
