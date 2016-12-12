@@ -50,7 +50,7 @@ $av-enable-grid-rev:          false !default;
 /**
  * LOGIC aka THE MAGIC
  */
-@function escapeNumerator($numerator, $namespace: '') {
+@function escape-numerator($numerator, $namespace: '') {
   @if ($namespace == '') {
     $numerator-as-string: inspect($numerator);
     $escaped-numerator: '';
@@ -69,14 +69,14 @@ $av-enable-grid-rev:          false !default;
   }
 }
 
-@function avCreateWidthClassName($style, $numerator, $denominator, $breakpoint-alias) {
+@function av-create-width-class-name($style, $numerator, $denominator, $breakpoint-alias) {
 
   $class-name: null;
 
   @if $style == 'fraction' or $style == 'fragment' {
     // Set delimiter as slash or text
     $delimiter: if($style == 'fraction', \/, -of-);
-    $class-name: #{$av-width-class-namespace}#{escapeNumerator($numerator, $av-width-class-namespace)}#{$delimiter}#{$denominator}#{$breakpoint-alias};
+    $class-name: #{$av-width-class-namespace}#{escape-numerator($numerator, $av-width-class-namespace)}#{$delimiter}#{$denominator}#{$breakpoint-alias};
   }
 
   @else {
@@ -119,7 +119,7 @@ $av-enable-grid-rev:          false !default;
     @if ($denominator == 1) {
 
       // Create 1/1 class
-      $class-name: avCreateWidthClassName($av-width-class-style, 1, 1, $breakpoint-alias);
+      $class-name: av-create-width-class-name($av-width-class-style, 1, 1, $breakpoint-alias);
       .#{$class-name} {
         width: 100%;
       }
@@ -132,7 +132,7 @@ $av-enable-grid-rev:          false !default;
       @for $numerator from 1 to $denominator {
 
         // Create class name and set width value
-        $class-name: avCreateWidthClassName($av-width-class-style, $numerator,$denominator, $breakpoint-alias);
+        $class-name: av-create-width-class-name($av-width-class-style, $numerator,$denominator, $breakpoint-alias);
         $width-value: percentage($numerator / $denominator);
 
         // Is this width already in our utility map?
