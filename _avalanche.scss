@@ -47,10 +47,6 @@ $av-enable-grid-huge:         false !default;
 $av-enable-grid-auto:         false !default;
 $av-enable-grid-rev:          false !default;
 
-
-
-
-
 /**
  * LOGIC aka THE MAGIC
  */
@@ -169,10 +165,6 @@ $av-enable-grid-rev:          false !default;
     @error "No breakpoint found for #{$alias}";
   }
 }
-
-
-
-
 
 /**
  * GRID LAYOUT
@@ -322,10 +314,6 @@ $av-enable-grid-rev:          false !default;
     }
   }
 }
-
-
-
-
 
 /**
  * GRID WIDTHS
