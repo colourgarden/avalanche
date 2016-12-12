@@ -119,6 +119,7 @@ $av-enable-grid-rev:          false !default;
 
       // Create 1/1 class
       $class-name: av-create-width-class-name($av-width-class-style, 1, 1, $breakpoint-alias);
+
       .#{$class-name} {
         width: 100%;
       }
@@ -198,7 +199,6 @@ $av-enable-grid-rev:          false !default;
 }
 
 @if $av-enable-grid-center {
-
   .#{avCreateBlockClassName('center')} {
     text-align: center;
 
@@ -209,7 +209,6 @@ $av-enable-grid-rev:          false !default;
 }
 
 @if $av-enable-grid-cell-center {
-
   .#{avCreateElementClassName('center')} {
     display: block;
     margin: 0 auto;
@@ -217,7 +216,6 @@ $av-enable-grid-rev:          false !default;
 }
 
 @if $av-enable-grid-right {
-
   .#{avCreateBlockClassName('right')} {
     text-align: right;
 
@@ -228,9 +226,7 @@ $av-enable-grid-rev:          false !default;
 }
 
 @if $av-enable-grid-middle {
-
   .#{avCreateBlockClassName('middle')} {
-
     > .#{avCreateElementClassName()} {
       vertical-align: middle;
     }
@@ -238,9 +234,7 @@ $av-enable-grid-rev:          false !default;
 }
 
 @if $av-enable-grid-bottom {
-
   .#{avCreateBlockClassName('bottom')} {
-
     > .#{avCreateElementClassName()} {
       vertical-align: bottom;
     }
@@ -248,7 +242,6 @@ $av-enable-grid-rev:          false !default;
 }
 
 @if $av-enable-grid-flush {
-
   .#{avCreateBlockClassName('flush')} {
     margin-left: 0;
 
@@ -259,7 +252,6 @@ $av-enable-grid-rev:          false !default;
 }
 
 @if $av-enable-grid-tiny {
-
   .#{avCreateBlockClassName('tiny')} {
     margin-left: -($av-gutter / 4);
 
@@ -270,7 +262,6 @@ $av-enable-grid-rev:          false !default;
 }
 
 @if $av-enable-grid-small {
-
   .#{avCreateBlockClassName('small')} {
     margin-left: -($av-gutter / 2);
 
@@ -281,7 +272,6 @@ $av-enable-grid-rev:          false !default;
 }
 
 @if $av-enable-grid-large {
-
   .#{avCreateBlockClassName('large')} {
     margin-left: -($av-gutter * 2);
 
@@ -292,7 +282,6 @@ $av-enable-grid-rev:          false !default;
 }
 
 @if $av-enable-grid-huge {
-
   .#{avCreateBlockClassName('huge')} {
     margin-left: -($av-gutter * 4);
 
@@ -303,9 +292,7 @@ $av-enable-grid-rev:          false !default;
 }
 
 @if $av-enable-grid-auto {
-
   .#{avCreateBlockClassName('auto')} {
-
     > .#{avCreateElementClassName()} {
       width: auto;
     }
@@ -313,7 +300,6 @@ $av-enable-grid-rev:          false !default;
 }
 
 @if $av-enable-grid-rev {
-
   .#{avCreateBlockClassName('rev')} {
     direction: rtl;
 
