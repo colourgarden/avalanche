@@ -63,6 +63,7 @@ $av-enable-grid-rev:          false !default;
 
     @return $escaped-numerator;
   }
+
   @else {
     @return $numerator;
   }
@@ -77,6 +78,7 @@ $av-enable-grid-rev:          false !default;
     $delimiter: if($style == 'fraction', \/, -of-);
     $class-name: #{$av-width-class-namespace}#{escapeNumerator($numerator, $av-width-class-namespace)}#{$delimiter}#{$denominator}#{$breakpoint-alias};
   }
+
   @else {
     @if $av-width-class-namespace == '' {
       @error "Percentage value class names require a namespace to be set (see $av-width-class-namespace). Selective escaping (e.g. the 5 of 50) cannot be done.";
@@ -123,6 +125,7 @@ $av-enable-grid-rev:          false !default;
       }
 
     }
+
     @else {
 
       // Loop widths as fractions
@@ -142,6 +145,7 @@ $av-enable-grid-rev:          false !default;
           @if $duplicate {
             @extend .#{$duplicate};
           }
+
           @else {
             width: $width-value;
           }
@@ -166,6 +170,7 @@ $av-enable-grid-rev:          false !default;
       @content;
     }
   }
+
   @else {
     @error "No breakpoint found for #{$alias}";
   }
@@ -329,7 +334,6 @@ $av-enable-grid-rev:          false !default;
 
 // If responsive flag enabled, loop breakpoint widths
 @if $av-enable-responsive {
-
   @each $alias, $query in $av-breakpoints {
 
     // Create each media query
