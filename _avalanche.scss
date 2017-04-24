@@ -1,9 +1,8 @@
 /*! Avalanche | MIT License | @colourgarden */
 
-/*------------------------------------*\
-    SETTINGS
-\*------------------------------------*/
-
+/**
+ * SETTINGS
+ */
 $av-namespace:              'grid' !default;      // Prefix namespace for grid layout and cells
 $av-element-name:           'cell' !default;      // Element/cell name
 $av-element-class-chain:    '__' !default;        // Chain characters between block and element
@@ -48,41 +47,40 @@ $av-enable-grid-huge:         false !default;
 $av-enable-grid-auto:         false !default;
 $av-enable-grid-rev:          false !default;
 
-
-
-
-
-/*------------------------------------*\
-    LOGIC aka THE MAGIC
-\*------------------------------------*/
-
-@function escapeNumerator($numerator, $namespace: ''){
-  @if($namespace == ''){
+/**
+ * LOGIC aka THE MAGIC
+ */
+@function escape-numerator($numerator, $namespace: '') {
+  @if ($namespace == '') {
     $numerator-as-string: inspect($numerator);
     $escaped-numerator: '';
 
     // Loop through all digits in the numerator and escape individually
-    @for $i from 1 through str-length($numerator-as-string){
+    @for $i from 1 through str-length($numerator-as-string) {
       $digit: str-slice($numerator-as-string, $i, $i);
       $escaped-numerator: $escaped-numerator+\3+$digit;
     }
 
     @return $escaped-numerator;
-  } @else {
+  }
+
+  @else {
     @return $numerator;
   }
 }
 
-@function avCreateWidthClassName($style, $numerator, $denominator, $breakpoint-alias){
+@function av-create-width-class-name($style, $numerator, $denominator, $breakpoint-alias) {
 
   $class-name: null;
 
-  @if $style == 'fraction' or $style == 'fragment'{
+  @if $style == 'fraction' or $style == 'fragment' {
     // Set delimiter as slash or text
     $delimiter: if($style == 'fraction', \/, -of-);
-    $class-name: #{$av-width-class-namespace}#{escapeNumerator($numerator, $av-width-class-namespace)}#{$delimiter}#{$denominator}#{$breakpoint-alias};
-  } @else{
-    @if $av-width-class-namespace == ''{
+    $class-name: #{$av-width-class-namespace}#{escape-numerator($numerator, $av-width-class-namespace)}#{$delimiter}#{$denominator}#{$breakpoint-alias};
+  }
+
+  @else {
+    @if $av-width-class-namespace == '' {
       @error "Percentage value class names require a namespace to be set (see $av-width-class-namespace). Selective escaping (e.g. the 5 of 50) cannot be done.";
     }
     $class-width: floor(($numerator / $denominator) * 100);
@@ -92,7 +90,7 @@ $av-enable-grid-rev:          false !default;
   @return $class-name;
 }
 
-@function avCreateBlockClassName($modifier: ''){
+@function avCreateBlockClassName($modifier: '') {
   @if $modifier == '' {
     @return #{$av-namespace};
   }
@@ -100,51 +98,54 @@ $av-enable-grid-rev:          false !default;
   @return #{$av-namespace}#{$av-modifier-class-chain}#{$modifier};
 }
 
-@function avCreateElementClassName($modifier: ''){
+@function avCreateElementClassName($modifier: '') {
   @if $modifier == '' {
     @return #{$av-namespace}#{$av-element-class-chain}#{$av-element-name};
   }
 
   @return #{$av-namespace}#{$av-element-class-chain}#{$av-element-name}#{$av-modifier-class-chain}#{$modifier};
-
 }
 
-@mixin av-create-widths($widths, $breakpoint-alias: null){
+@mixin av-create-widths($widths, $breakpoint-alias: null) {
 
   // Initialise an empty utility map that will eventually contain all our classes
   $pseudo-class-map: ();
 
   // Loop widths
-  @each $denominator in $widths{
+  @each $denominator in $widths {
 
     // If 1=1, 2=2, 3=3; @for will skip over so create 1/1 class manually
     @if ($denominator == 1) {
 
       // Create 1/1 class
-      $class-name: avCreateWidthClassName($av-width-class-style, 1, 1, $breakpoint-alias);
-      .#{$class-name}{
+      $class-name: av-create-width-class-name($av-width-class-style, 1, 1, $breakpoint-alias);
+
+      .#{$class-name} {
         width: 100%;
       }
+    }
 
-    } @else {
+    @else {
 
       // Loop widths as fractions
-      @for $numerator from 1 to $denominator{
+      @for $numerator from 1 to $denominator {
 
         // Create class name and set width value
-        $class-name: avCreateWidthClassName($av-width-class-style, $numerator,$denominator, $breakpoint-alias);
+        $class-name: av-create-width-class-name($av-width-class-style, $numerator, $denominator, $breakpoint-alias);
         $width-value: percentage($numerator / $denominator);
 
         // Is this width already in our utility map?
         $duplicate: map-get($pseudo-class-map, $width-value);
 
         // Create width class
-        .#{$class-name}{
+        .#{$class-name} {
 
           // If this width is in utility map, @extend the duplicate, else create a new one
-          @if $duplicate{
+          @if $duplicate {
             @extend .#{$duplicate};
-          } @else{
+          }
+
+          @else {
             width: $width-value;
           }
         }
@@ -157,39 +158,36 @@ $av-enable-grid-rev:          false !default;
   }
 }
 
-@mixin av-mq($alias){
+@mixin av-mq($alias) {
 
   // Search breakpoint map for alias
   $query: map-get($av-breakpoints, $alias);
 
   // If alias exists, print out media query
-  @if $query{
-    @media #{$query}{
+  @if $query {
+    @media #{$query} {
       @content;
     }
-  } @else{
+  }
+
+  @else {
     @error "No breakpoint found for #{$alias}";
   }
 }
 
-
-
-
-
-/*------------------------------------*\
-    GRID LAYOUT
-\*------------------------------------*/
-
-.#{avCreateBlockClassName()}{
+/**
+ * GRID LAYOUT
+ */
+.#{avCreateBlockClassName()} {
   display: block;
   list-style: none;
   padding: 0;
   margin: 0;
   margin-left: -($av-gutter);
-  font-size: 0rem;
+  font-size: 0;
 }
 
-.#{avCreateElementClassName()}{
+.#{avCreateElementClassName()} {
   box-sizing: border-box;
   display: inline-block;
   width: 100%;
@@ -200,150 +198,130 @@ $av-enable-grid-rev:          false !default;
   font-size: 1rem;
 }
 
-@if $av-enable-grid-center{
-
-  .#{avCreateBlockClassName('center')}{
+@if $av-enable-grid-center {
+  .#{avCreateBlockClassName('center')} {
     text-align: center;
 
-    > .#{avCreateElementClassName()}{
+    > .#{avCreateElementClassName()} {
       text-align: left;
     }
   }
 }
 
-@if $av-enable-grid-cell-center{
-
-  .#{avCreateElementClassName('center')}{
+@if $av-enable-grid-cell-center {
+  .#{avCreateElementClassName('center')} {
     display: block;
     margin: 0 auto;
   }
 }
 
-@if $av-enable-grid-right{
-
-  .#{avCreateBlockClassName('right')}{
+@if $av-enable-grid-right {
+  .#{avCreateBlockClassName('right')} {
     text-align: right;
 
-    > .#{avCreateElementClassName()}{
+    > .#{avCreateElementClassName()} {
       text-align: left;
     }
   }
 }
 
-@if $av-enable-grid-middle{
-
-  .#{avCreateBlockClassName('middle')}{
-
-    > .#{avCreateElementClassName()}{
+@if $av-enable-grid-middle {
+  .#{avCreateBlockClassName('middle')} {
+    > .#{avCreateElementClassName()} {
       vertical-align: middle;
     }
   }
 }
 
-@if $av-enable-grid-bottom{
-
-  .#{avCreateBlockClassName('bottom')}{
-
-    > .#{avCreateElementClassName()}{
+@if $av-enable-grid-bottom {
+  .#{avCreateBlockClassName('bottom')} {
+    > .#{avCreateElementClassName()} {
       vertical-align: bottom;
     }
   }
 }
 
-@if $av-enable-grid-flush{
-
-  .#{avCreateBlockClassName('flush')}{
+@if $av-enable-grid-flush {
+  .#{avCreateBlockClassName('flush')} {
     margin-left: 0;
 
-    > .#{avCreateElementClassName()}{
+    > .#{avCreateElementClassName()} {
       padding-left: 0;
     }
   }
 }
 
-@if $av-enable-grid-tiny{
-
-  .#{avCreateBlockClassName('tiny')}{
+@if $av-enable-grid-tiny {
+  .#{avCreateBlockClassName('tiny')} {
     margin-left: -($av-gutter / 4);
 
-    > .#{avCreateElementClassName()}{
+    > .#{avCreateElementClassName()} {
       padding-left: ($av-gutter / 4);
     }
   }
 }
 
-@if $av-enable-grid-small{
-
-  .#{avCreateBlockClassName('small')}{
+@if $av-enable-grid-small {
+  .#{avCreateBlockClassName('small')} {
     margin-left: -($av-gutter / 2);
 
-    > .#{avCreateElementClassName()}{
+    > .#{avCreateElementClassName()} {
       padding-left: ($av-gutter / 2);
     }
   }
 }
 
-@if $av-enable-grid-large{
-
-  .#{avCreateBlockClassName('large')}{
+@if $av-enable-grid-large {
+  .#{avCreateBlockClassName('large')} {
     margin-left: -($av-gutter * 2);
 
-    > .#{avCreateElementClassName()}{
+    > .#{avCreateElementClassName()} {
       padding-left: ($av-gutter * 2);
     }
   }
 }
 
-@if $av-enable-grid-huge{
-
-  .#{avCreateBlockClassName('huge')}{
+@if $av-enable-grid-huge {
+  .#{avCreateBlockClassName('huge')} {
     margin-left: -($av-gutter * 4);
 
-    > .#{avCreateElementClassName()}{
+    > .#{avCreateElementClassName()} {
       padding-left: ($av-gutter * 4);
     }
   }
 }
 
-@if $av-enable-grid-auto{
-
-  .#{avCreateBlockClassName('auto')}{
-
-    > .#{avCreateElementClassName()}{
+@if $av-enable-grid-auto {
+  .#{avCreateBlockClassName('auto')} {
+    > .#{avCreateElementClassName()} {
       width: auto;
     }
   }
 }
 
-@if $av-enable-grid-rev{
-
-  .#{avCreateBlockClassName('rev')}{
+@if $av-enable-grid-rev {
+  .#{avCreateBlockClassName('rev')} {
     direction: rtl;
 
-    > .#{avCreateElementClassName()}{
+    > .#{avCreateElementClassName()} {
       direction: ltr;
     }
   }
 }
 
-
-
-
-
-/*------------------------------------*\
-    GRID WIDTHS
-\*------------------------------------*/
+/**
+ * GRID WIDTHS
+ */
 
 // Loop default widths
 @include av-create-widths($av-widths);
 
 // If responsive flag enabled, loop breakpoint widths
-@if $av-enable-responsive{
-
-  @each $alias, $query in $av-breakpoints{
+@if $av-enable-responsive {
+  @each $alias, $query in $av-breakpoints {
 
     // Create each media query
-    @media #{$query}{
+    @media #{$query} {
       @include av-create-widths($av-widths, #{$av-breakpoint-class-chain}#{$alias});
     }
   }
