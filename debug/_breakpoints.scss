@@ -1,0 +1,37 @@
+// Derived vars
+$av-number-of-breakpoints: length($av-breakpoints);
+$av-breakpoint-keys : map-keys($av-breakpoints);
+$av-breakpoint-values : map-values($av-breakpoints);
+
+@import './breakpoints/helpers/string';
+@import './breakpoints/helpers/list';
+@import './breakpoints/helpers/mediaquery';
+@import './breakpoints/label';
+@import './breakpoints/mixins';
+
+@if $av-enable-debug {
+
+  // Objective: create combinations of media queries.
+  // Desired combination sequence for example of 4 queries. 
+  // More complex queries come last, because they need to overrule the simpler ones.
+  // Difficulty: 'and' and 'or' mediaqueries needs to be combined accordingly
+  // Some combinations won't make any sence, but let the browser handle this
+
+  // 1
+  // 2
+  // 3
+  // 4
+  // 1 2
+  // 1 3
+  // 1 4
+  // 2 3
+  // 2 4
+  // 3 4
+  // 1 2 3
+  // 1 2 4
+  // 1 3 4
+  // 2 3 4
+  // 1 2 3 4
+
+  @include breakpointCombinations;
+}

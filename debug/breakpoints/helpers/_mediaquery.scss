@@ -1,0 +1,70 @@
+@function queryHasOrCondition($query) {
+  @if type-of($query) == string and str-index($query, ',') {
+    @return true;
+  }
+  
+  @return false;
+}
+
+@function queryHasAndCondition($query) {
+  @return not queryHasOrCondition($query);
+}
+
+@function queryIsMediaType($query) {
+  // !! Only consider screen and print for now
+  @if( $query == screen or $query == print) {
+    @return true;
+  }
+
+  @return false;
+}
+
+@function getQuery($index) {
+  @return unquote(nth($av-breakpoint-values, $index));
+}
+
+@function getQueryKeys($indexes) {
+
+  $results: ();
+
+  @each $index in $indexes {
+    $results: append($results, nth($av-breakpoint-keys, $index), comma);
+  }
+
+  @return list-implode($results, ', ');
+}
+
+@function combineAndWithOr($and-query, $or-query) {
+
+  $return : ();
+
+  @each $or-condition in str-explode($or-query, ',') {
+    $combination: combineAndWithAnd($and-query, $or-condition);
+    $return: append($return, $combination, comma);
+  }
+
+  @return inspect($return); // render as string
+}
+
+@function combineOrWithAnd($or-query, $and-query) {
+  @return combineAndWithOr($and-query, $or-query);
+}
+
+@function combineAndWithAnd($and-query, $and-query2) {
+  $join: join($and-query, $and-query2); 
+  @return list-implode($join, ' and ');
+}
+
+@function combineOrWithOr($or-query, $or-query2) {
+
+  $return : ();
+
+  @each $or-condition in str-explode($or-query, ',') {
+    @each $or-condition2 in str-explode($or-query2, ',') {
+      $combination: combineAndWithAnd($or-condition, $or-condition2);
+      $return: append($return, $combination, comma);
+    }
+  }
+
+  @return inspect($return);
+}

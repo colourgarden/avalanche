@@ -1,0 +1,104 @@
+@mixin breakpointCombinations() {
+  
+  // Increase media query complexity
+  @for $complexity from 1 through $av-number-of-breakpoints{
+    // Loop through all queries and create combinations for this complexity level
+    @for $index from 1 through $av-number-of-breakpoints {
+      $combination: $index;
+      @include breakpointCombinationsLoop($index, $combination, $complexity);
+    }
+  } 
+} 
+
+@mixin breakpointCombinationsLoop($index, $combination, $complexity) {
+
+  // The hard work: recursive loop to create a combination of breakpoint indexes for a given complexity
+  @if length($combination) < $complexity {
+    @if( $index < $av-number-of-breakpoints){
+      @for $next from $index + 1 through $av-number-of-breakpoints {
+        @include breakpointCombinationsLoop($next, append($combination, $next), $complexity);     
+      }
+    }
+  }
+  @else {
+    @include renderBreakpointCombinations($combination);
+  }
+}
+
+@mixin renderBreakpointCombinations($indexes) {
+
+  // Given 4 mediaqueries with and / or
+  // a , b (=> or)
+  // c , d (=> or)
+  // e and f
+  // g and h
+
+  // Desired output for...
+  // eg. queries 1 & 2
+  // => a and c , a and d, b and c, b and d
+  // 
+  // eg. queries 2 & 4
+  // => c and e and f , d and e and f
+
+  $queries: (); 
+  $outputs: ();
+
+  // Loop through all query indexes to add them to the final queries
+  @each $index in $indexes {
+
+    $query: getQuery($index);
+
+    // $queries has OR
+    @if queryHasOrCondition($queries) {
+      @if queryHasOrCondition($query) {
+        $queries: combineOrWithOr($queries, $query);
+      }
+      @else {
+        $queries: combineOrWithAnd($queries, $query);
+      }
+    }
+    // $queries has AND or is empty the first time
+    @else {
+      @if queryHasOrCondition($query) {
+        $queries: combineAndWithOr($queries, $query);
+      }
+      @else {
+        $queries: combineAndWithAnd($queries, $query);
+      }
+    }
+  }
+
+  @each $query in str-explode($queries, ',') {
+
+    $media-types: ();
+    $expressions: ();
+
+    // Strip double media types
+    $expressions-or-types: list-remove-duplicates(str-explode($query, 'and'));
+
+    @each $expression-or-type in $expressions-or-types {
+      @if queryIsMediaType($expression-or-type) {
+        $media-types: append($media-types, $expression-or-type);
+      }
+      @else {
+        $expressions: append($expressions, $expression-or-type, comma);
+      }
+    }
+
+    // Cannot have more than 1 media type in 1 query
+    @if length($media-types) < 2 {
+      $output: join($media-types, $expressions);
+      $output: list-implode($output, ' and ');
+      $outputs: append($outputs, $output, comma); 
+    }
+  }
+
+  // That's all folks
+  @if length($outputs) > 0 {
+    @media #{list-implode($outputs, ', ')} {
+      html:after {
+        content: getQueryKeys($indexes);
+      }
+    }
+  }
+}
