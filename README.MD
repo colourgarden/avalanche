@@ -14,7 +14,7 @@
 
 ## Demo
 
-View <a href="http://colourgarden.net/avalanche/">the demo</a> to see Avalanche in action!
+View <a href="http://colourgarden.github.io/avalanche/">the demo</a> to see Avalanche in action!
 
 ## Installation
 
