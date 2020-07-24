@@ -1,3 +1,5 @@
+> :mega: Avalanche 2 coming soon with Custom Properties.
+
 # Avalanche CSS grid system
 
 **Superclean, powerful, responsive, Sass-based, BEM-syntax CSS grid system**
@@ -18,17 +20,13 @@ View <a href="http://colourgarden.github.io/avalanche/">the demo</a> to see Aval
 
 ## Installation
 
-1. Import `_avalanche.scss` to your project via Bower, NPM or manually copying to vendor folder (`@import "vendor/avalanche"`)
-2. Override settings to fit your requirements or use the defaults
+1. Import `_avalanche.scss` to your project via npm or manual copy
+2. Override settings to fit your requirements or simply use the minimal defaults
 3. Compile!
 
 ### NPM
 
 `npm install --save avalanche-css`
-
-### Bower
-
-`bower install --save avalanche-css`
 
 ## Usage
 
@@ -157,7 +155,7 @@ All modern browsers are supported and Internet Explorer from IE9 upwards. If IE8
 
 When issuing a pull request to improve this project, please:
 
-1. Rigourously comment your code, particularly where new variables are introduced or manipulated
+1. Rigourously comment your code, particularly where new concepts are introduced
 2. Ensure your work passes the stylelint linter ([sample gulpfile](https://gist.github.com/colourgarden/e9f82816db3f971f9da73053b0eb83af))
 3. Be as descriptive as possible in your commit message
 
