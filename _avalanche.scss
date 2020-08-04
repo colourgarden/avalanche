@@ -46,6 +46,7 @@ $av-enable-grid-large:        false !default;
 $av-enable-grid-huge:         false !default;
 $av-enable-grid-auto:         false !default;
 $av-enable-grid-rev:          false !default;
+$av-enable-debug:             false !default;
 
 /**
  * LOGIC aka THE MAGIC
@@ -307,3 +308,9 @@ $av-enable-grid-rev:          false !default;
     }
   }
 }
+
+/**
+ * DEBUG
+ */
+
+@import 'debug/breakpoints';

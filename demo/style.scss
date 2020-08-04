@@ -1,0 +1,19 @@
+$av-enable-debug: true;
+
+@import "../_avalanche";
+
+
+body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+}
+
+.help {
+  padding: 10px;
+  color: #ddd;
+  text-align: center;
+  font-size: 21px;
+  font-family: sans-serif;
+}

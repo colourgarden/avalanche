@@ -7,6 +7,9 @@
     "type": "git",
     "url": "https://github.com/colourgarden/avalanche.git"
   },
+  "scripts": {
+    "demo": "node-sass demo/style.scss demo/style.css"
+  },
   "author": "Tom Hare <tom@hare.me>",
   "license": "MIT",
   "bugs": {
@@ -17,5 +20,8 @@
     "css",
     "grid",
     "oocss"
-  ]
+  ],
+  "devDependencies": {
+    "node-sass": "^4.5.3"
+  }
 }
