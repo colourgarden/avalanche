@@ -50,25 +50,6 @@ $av-enable-grid-rev:          false !default;
 /**
  * LOGIC aka THE MAGIC
  */
-@function escape-numerator($numerator, $namespace: '') {
-  @if ($namespace == '') {
-    $numerator-as-string: inspect($numerator);
-    $escaped-numerator: '';
-
-    // Loop through all digits in the numerator and escape individually
-    @for $i from 1 through str-length($numerator-as-string) {
-      $digit: str-slice($numerator-as-string, $i, $i);
-      $escaped-numerator: $escaped-numerator+\3+$digit;
-    }
-
-    @return $escaped-numerator;
-  }
-
-  @else {
-    @return $numerator;
-  }
-}
-
 @function av-create-width-class-name($style, $numerator, $denominator, $breakpoint-alias) {
 
   $class-name: null;
@@ -76,7 +57,7 @@ $av-enable-grid-rev:          false !default;
   @if $style == 'fraction' or $style == 'fragment' {
     // Set delimiter as slash or text
     $delimiter: if($style == 'fraction', \/, -of-);
-    $class-name: #{$av-width-class-namespace}#{escape-numerator($numerator, $av-width-class-namespace)}#{$delimiter}#{$denominator}#{$breakpoint-alias};
+    $class-name: #{$av-width-class-namespace}#{$numerator}#{$delimiter}#{$denominator}#{$breakpoint-alias};
   }
 
   @else {
@@ -120,7 +101,7 @@ $av-enable-grid-rev:          false !default;
       // Create 1/1 class
       $class-name: av-create-width-class-name($av-width-class-style, 1, 1, $breakpoint-alias);
 
-      .#{$class-name} {
+      [class~="#{$class-name}"] {
         width: 100%;
       }
     }
@@ -138,11 +119,11 @@ $av-enable-grid-rev:          false !default;
         $duplicate: map-get($pseudo-class-map, $width-value);
 
         // Create width class
-        .#{$class-name} {
+        [class~="#{$class-name}"] {
 
           // If this width is in utility map, @extend the duplicate, else create a new one
           @if $duplicate {
-            @extend .#{$duplicate};
+            @extend [class~="#{$duplicate}"];
           }
 
           @else {
