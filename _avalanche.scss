@@ -1,5 +1,5 @@
 /*! Avalanche | MIT License | @colourgarden */
-
+@use 'sass:math';
 /**
  * SETTINGS
  */
@@ -113,7 +113,7 @@ $av-enable-grid-rev:          false !default;
 
         // Create class name and set width value
         $class-name: av-create-width-class-name($av-width-class-style, $numerator, $denominator, $breakpoint-alias);
-        $width-value: percentage($numerator / $denominator);
+        $width-value: percentage(math.div($numerator, $denominator));
 
         // Is this width already in our utility map?
         $duplicate: map-get($pseudo-class-map, $width-value);
